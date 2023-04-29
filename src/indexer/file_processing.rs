@@ -1,12 +1,10 @@
+use crate::data_ingestion;
 use crate::data_ingestion::text_processing::process_text;
-use std::collections::HashMap;
-use std::fs::{self, File};
-use std::io::Read;
+use data_ingestion::file_handler::*;
+use std::fs;
 use std::path::Path;
 
 use super::IndexStorage;
-
-pub struct FileProcessing;
 
 pub fn process_directory<P: AsRef<Path>>(
     path: P,
@@ -35,15 +33,51 @@ pub fn process_file<P: AsRef<Path>>(
     index: &mut IndexStorage,
 ) -> Result<(), Box<dyn std::error::Error>> {
     let path = path.as_ref();
-    let mut file = File::open(path)?;
-    let mut content = String::new();
-    file.read_to_string(&mut content)?;
+    let file_extension = path.extension().unwrap().to_str().unwrap();
+    match file_extension {
+        "md" => {
+            let file_handler = data_ingestion::MarkdownHandler;
+            let content = file_handler.read_contents(path.to_str().unwrap())?;
+            let processed_text = process_text(&content);
+            index.store_processed_text_in_index(&processed_text, path);
 
-    // Apply your text processing function here
-    let processed_text = process_text(&content);
+            Ok(())
+        }
+        "txt" => {
+            let file_handler = data_ingestion::PlainTextHandler;
+            let content = file_handler.read_contents(path.to_str().unwrap())?;
+            let processed_text = process_text(&content);
+            index.store_processed_text_in_index(&processed_text, path);
 
-    // Store the processed text in the index (e.g., in a database or an inverted index)
-    index.store_processed_text_in_index(&processed_text, path);
+            Ok(())
+        }
+        _ => {
+            return Err(From::from(format!(
+                "File extension {} is not supported.",
+                file_extension
+            )));
+        }
+    }
+}
 
-    Ok(())
+#[cfg(test)]
+mod tests {
+
+    #[test]
+    fn test_process_file() {
+        let file_path = "data/lorem_ipsum.txt";
+        let mut index = super::IndexStorage::new();
+        super::process_file(file_path, &mut index).unwrap();
+        print!("{:?}", index.index);
+        assert_eq!(index.index.len(), 74);
+    }
+
+    #[test]
+    fn test_process_directory() {
+        let dir_path = "data";
+        let mut index = super::IndexStorage::new();
+        super::process_directory(dir_path, &mut index).unwrap();
+        print!("{:?}", index.index);
+        assert_eq!(index.index.len(), 3);
+    }
 }

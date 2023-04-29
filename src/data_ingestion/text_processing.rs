@@ -1,5 +1,5 @@
 use rust_stemmers::{Algorithm, Stemmer};
-use tokenizers::tokenizer::{EncodeInput, Result, Tokenizer};
+use tokenizers::tokenizer::Tokenizer;
 
 pub fn process_text(text: &str) -> String {
     // Step 1: Convert text to lowercase
@@ -15,9 +15,8 @@ pub fn process_text(text: &str) -> String {
     let processed_tokens = apply_stemming_or_lemmatization(tokens);
 
     // Step 5: Join the processed tokens back into a single string
-    let processed_text = processed_tokens.join(" ");
 
-    processed_text
+    processed_tokens.join(" ")
 }
 
 /// Applies stemming or lemmatization to the tokens
@@ -62,6 +61,7 @@ fn tokenize(cleaned_text: String) -> Vec<String> {
 }
 
 /// Removes any characters that are not alphanumeric from the text
+/// it keeps spaces and punctuation
 ///
 /// # Arguments
 ///  * `lowercased_text` - The text to remove unwanted characters from
@@ -72,7 +72,7 @@ fn remove_unwanted_characters(lowercased_text: &str) -> String {
     let mut cleaned_text = String::new();
 
     for character in lowercased_text.chars() {
-        if character.is_alphanumeric() {
+        if character.is_alphanumeric() || character.is_whitespace() {
             cleaned_text.push(character);
         }
     }
@@ -139,5 +139,13 @@ mod tests {
             let output = stemmer.stem(input);
             assert_eq!(output, expected_output);
         }
+    }
+
+    #[test]
+    fn process_text_in_file() {
+        let file_path = "data/lorem_ipsum.txt";
+        let contents = std::fs::read_to_string(file_path).unwrap();
+        let processed_text = process_text(&contents);
+        assert_eq!(processed_text, "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum");
     }
 }
