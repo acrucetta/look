@@ -13,3 +13,16 @@ impl FileHandler for PlainTextHandler {
         Ok(content)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use crate::data_ingestion::{FileHandler, PlainTextHandler};
+
+    #[test]
+    fn test_load_file() {
+        let file_handler = PlainTextHandler;
+        let file_path = "data/hello_world.txt";
+        let contents = file_handler.read_contents(file_path).unwrap();
+        assert_eq!(contents, "Hello, world!");
+    }
+}

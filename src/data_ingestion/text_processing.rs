@@ -20,8 +20,27 @@ pub fn process_text(text: &str) -> String {
     processed_text
 }
 
+/// Applies stemming or lemmatization to the tokens
+///
+/// # Arguments
+///  * `tokens` - The tokens to apply stemming or lemmatization to
+///
+/// # Returns
+///
+/// * A vector of tokens with stemming or lemmatization applied
+///
 fn apply_stemming_or_lemmatization(tokens: Vec<String>) -> Vec<String> {
-    todo!()
+    // Step 1: Create a new stemmer
+    let stemmer = Stemmer::create(Algorithm::English);
+
+    // Step 2: Apply stemming to each token
+    let processed_tokens: Vec<String> = tokens
+        .iter()
+        .map(|token| stemmer.stem(token).to_string())
+        .collect();
+
+    // Step 3: Return the processed tokens
+    processed_tokens
 }
 
 /// Tokenizes the text into words
@@ -64,4 +83,61 @@ fn remove_unwanted_characters(lowercased_text: &str) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn test_remove_unwanted_characters() {
+        let tests: Vec<(&str, &str)> = vec![
+            ("Hello, world!", "Helloworld"),
+            ("Hello, world! 123", "Helloworld123"),
+            ("Hello, world! 123 $%^&*()", "Helloworld123"),
+        ];
+
+        for (input, expected_output) in tests {
+            let output = remove_unwanted_characters(input);
+            assert_eq!(output, expected_output);
+        }
+    }
+
+    #[test]
+    fn test_tokenize() {
+        let tests: Vec<(&str, Vec<&str>)> = vec![
+            ("Hello, world!", vec!["hello", ",", "world", "!"]),
+            ("Hello, world! 123", vec!["hello", ",", "world", "!", "123"]),
+            (
+                "Hello, world! 123 $%^&*()",
+                vec![
+                    "hello", ",", "world", "!", "123", "$", "%", "^", "&", "*", "(", ")",
+                ],
+            ),
+        ];
+
+        for (input, expected_output) in tests {
+            let output = tokenize(input.to_string());
+            assert_eq!(output, expected_output);
+        }
+    }
+
+    #[test]
+    fn test_process_text() {
+        let input = "Hello, world!";
+        let expected_output = "hello world";
+        let output = process_text(input);
+        assert_eq!(output, expected_output);
+    }
+
+    #[test]
+    fn test_stemmer() {
+        let stemmer = Stemmer::create(Algorithm::English);
+        let tests: Vec<(&str, &str)> = vec![
+            ("fruitless", "fruitless"),
+            ("fruitlessly", "fruitless"),
+            ("fruitlessness", "fruitless"),
+            ("fruition", "fruition"),
+        ];
+
+        for (input, expected_output) in tests {
+            let output = stemmer.stem(input);
+            assert_eq!(output, expected_output);
+        }
+    }
 }
