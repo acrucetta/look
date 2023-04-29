@@ -13,11 +13,11 @@ pub trait FileHandler {
 ///
 /// # Panics
 ///
-/// Panics if .
+/// Panics if the directory cannot be read.
 ///
 /// # Errors
 ///
-/// This function will return an error if .
+/// This function will return an error if the directory cannot be read.
 pub fn traverse_directory(
     directory_path: &str,
     file_handlers: &Vec<Box<dyn FileHandler>>,

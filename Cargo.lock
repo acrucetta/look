@@ -947,6 +947,8 @@ name = "looker"
 version = "0.1.0"
 dependencies = [
  "rust-stemmers",
+ "serde",
+ "serde_json",
  "tokenizers",
 ]
 
