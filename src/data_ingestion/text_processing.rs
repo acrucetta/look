@@ -3,10 +3,6 @@ use unicode_segmentation::UnicodeSegmentation;
 use whatlang::Lang;
 
 pub fn process_text(text: &str) -> String {
-    // CHeck if the text is in spanish using whatlang
-    let info = whatlang::detect(text).unwrap();
-    let lang = info.lang();
-
     // Step 1: Convert text to lowercase
     let lowercased_text = text.to_lowercase();
 
@@ -20,29 +16,6 @@ pub fn process_text(text: &str) -> String {
     // TODO: Removed stemming for now, might add it back later
 
     tokens.join("")
-}
-
-/// Applies stemming or lemmatization to the tokens
-///
-/// # Arguments
-///  * `tokens` - The tokens to apply stemming or lemmatization to
-///
-/// # Returns
-///
-/// * A vector of tokens with stemming or lemmatization applied
-///
-fn apply_stemming(tokens: Vec<String>, lang: Lang) -> Vec<String> {
-    let stemmer = match lang {
-        Lang::Eng => Stemmer::create(Algorithm::English),
-        Lang::Spa => Stemmer::create(Algorithm::Spanish),
-        _ => panic!("Language not supported"),
-    };
-    let processed_tokens: Vec<String> = tokens
-        .iter()
-        .map(|token| stemmer.stem(token).to_string())
-        .collect();
-
-    processed_tokens
 }
 
 /// Tokenizes the text into words

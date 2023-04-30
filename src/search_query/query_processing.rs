@@ -33,16 +33,16 @@ pub fn search(query: &str, index: &Index) -> Vec<SearchResult> {
     let processed_query = process_text(query);
 
     // 2. Calculate the query's TF-IDF
-    let query_tfidf = calculate_query_tfidf(&processed_query, &index);
+    let query_tfidf = calculate_query_tfidf(&processed_query, index);
 
     // 3. Retrieve relevant documents
-    let candidate_documents = retrieve_candidate_documents(&processed_query, &index);
+    let candidate_documents = retrieve_candidate_documents(&processed_query, index);
 
     // 4. Rank the documents
-    let ranked_documents = rank_documents(&candidate_documents, &query_tfidf, &index);
+    
 
     // 5. Return the search results
-    ranked_documents
+    rank_documents(&candidate_documents, &query_tfidf, index)
 }
 
 /// Function to calculate the query's TF-IDF
@@ -155,10 +155,10 @@ fn rank_documents(
 mod tests {
     use std::collections::{HashMap, HashSet};
 
-    use serde::de::value::Error;
+    
 
     use crate::{
-        indexer::{file_processing::Document, index_storage::Term, Index},
+        indexer::{file_processing::Document, Index},
         search_query::{
             query_processing::{rank_documents, retrieve_candidate_documents},
             SearchResult,

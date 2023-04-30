@@ -17,11 +17,6 @@ impl Document {
     pub fn new(path: String, contents: String) -> Document {
         Document { path, contents }
     }
-
-    // To string method
-    pub fn to_string(&self) -> String {
-        format!("{}: {}", self.path, self.contents)
-    }
 }
 
 impl std::fmt::Display for Document {
@@ -62,7 +57,7 @@ pub fn process_file<P: AsRef<Path>>(
         "md" => {
             let file_handler = data_ingestion::MarkdownHandler;
             let content = file_handler.read_contents(path.to_str().unwrap())?;
-            let processed_text = process_text(&content);
+            let _processed_text = process_text(&content);
             let document = Document::new(path.to_str().unwrap().to_owned(), content);
             index.store_processed_text_in_index(&document);
 
@@ -71,18 +66,16 @@ pub fn process_file<P: AsRef<Path>>(
         "txt" => {
             let file_handler = data_ingestion::PlainTextHandler;
             let content = file_handler.read_contents(path.to_str().unwrap())?;
-            let processed_text = process_text(&content);
+            let _processed_text = process_text(&content);
             let document = Document::new(path.to_str().unwrap().to_owned(), content);
             index.store_processed_text_in_index(&document);
 
             Ok(())
         }
-        _ => {
-            return Err(From::from(format!(
-                "File extension {} is not supported.",
-                file_extension
-            )));
-        }
+        _ => Err(From::from(format!(
+            "File extension {} is not supported.",
+            file_extension
+        ))),
     }
 }
 
