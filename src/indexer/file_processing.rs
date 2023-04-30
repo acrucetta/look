@@ -7,10 +7,27 @@ use std::path::Path;
 
 use super::Index;
 
-#[derive(Debug, Serialize, Deserialize)]
+#[derive(Clone, Serialize, Deserialize, Eq, PartialEq, Debug, Hash, PartialOrd, Ord)]
 pub struct Document {
     pub path: String,
     pub contents: String,
+}
+
+impl Document {
+    pub fn new(path: String, contents: String) -> Document {
+        Document { path, contents }
+    }
+
+    // To string method
+    pub fn to_string(&self) -> String {
+        format!("{}: {}", self.path, self.contents)
+    }
+}
+
+impl std::fmt::Display for Document {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        write!(f, "{}", self.path)
+    }
 }
 
 pub fn process_directory<P: AsRef<Path>>(
@@ -46,7 +63,8 @@ pub fn process_file<P: AsRef<Path>>(
             let file_handler = data_ingestion::MarkdownHandler;
             let content = file_handler.read_contents(path.to_str().unwrap())?;
             let processed_text = process_text(&content);
-            index.store_processed_text_in_index(&processed_text, path);
+            let document = Document::new(path.to_str().unwrap().to_owned(), content);
+            index.store_processed_text_in_index(&document);
 
             Ok(())
         }
@@ -54,7 +72,8 @@ pub fn process_file<P: AsRef<Path>>(
             let file_handler = data_ingestion::PlainTextHandler;
             let content = file_handler.read_contents(path.to_str().unwrap())?;
             let processed_text = process_text(&content);
-            index.store_processed_text_in_index(&processed_text, path);
+            let document = Document::new(path.to_str().unwrap().to_owned(), content);
+            index.store_processed_text_in_index(&document);
 
             Ok(())
         }

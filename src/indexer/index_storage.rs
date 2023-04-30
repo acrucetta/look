@@ -7,14 +7,14 @@ use std::path::Path;
 
 use super::file_processing::Document;
 
-#[derive(Clone, Hash, Eq, PartialEq, Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Eq, PartialEq, Hash, Clone)]
 pub struct Term(pub String);
 
-#[derive(Clone, Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Index {
     pub inverted_index: HashMap<Term, HashMap<Document, u32>>,
     pub idf: HashMap<Term, f64>,
-    pub document_norms: HashMap<String, f64>,
+    pub document_norms: HashMap<Document, f64>,
     pub num_docs: usize,
 }
 
@@ -28,11 +28,12 @@ impl Index {
         }
     }
 
-    pub fn store_processed_text_in_index(&mut self, text: &str, path: &Path) {
-        let path_str = path.to_str().unwrap().to_owned();
-
+    pub fn store_processed_text_in_index(&mut self, document: &Document) {
         // Tokenize the processed text
-        let tokens = text.split_whitespace().collect::<Vec<&str>>();
+        let tokens = document.contents.split_whitespace().collect::<Vec<&str>>();
+
+        // Increment the number of documents in the index
+        self.num_docs += 1;
 
         // Insert each token into the index and calculate document norms
         let mut document_tfidf_squared_sum: f64 = 0.0;
@@ -42,7 +43,7 @@ impl Index {
                 .inverted_index
                 .entry(term.clone())
                 .or_insert_with(HashMap::new);
-            let term_frequency = entry.entry(path_str.clone()).or_insert(0);
+            let term_frequency = entry.entry(document.clone()).or_insert(0);
             *term_frequency += 1;
 
             let idf = self.idf.get(&term).unwrap_or(&1.0);
@@ -51,12 +52,22 @@ impl Index {
         }
 
         let document_norm = document_tfidf_squared_sum.sqrt();
-        self.document_norms.insert(path_str, document_norm);
+        self.document_norms.insert(document.clone(), document_norm);
     }
 
+    /// Function to calculate the IDF for each term in the index
+    ///
+    /// # Arguments
+    /// * `self` - The index to calculate the IDF for
+    ///  
+    /// # Returns
+    /// * `()` - The function returns nothing
+    ///
+    /// An example of what IDF does is shown below:
+    ///
     pub fn calculate_idf(&mut self) {
         for (term, docs) in &self.inverted_index {
-            let idf = (self.num_docs as f64 / docs.len() as f64).ln();
+            let idf = self.num_docs as f64 / docs.len() as f64;
             self.idf.insert(term.clone(), idf);
         }
     }
@@ -75,6 +86,29 @@ mod tests {
 
     use crate::indexer::index_storage::Term;
 
+    fn build_index_with_3_docs() -> super::Index {
+        use super::Index;
+        use std::path::Path;
+
+        let mut index = Index::new();
+        let text = "This is a test sentence.";
+        let path = Path::new("test.txt");
+        let document = super::Document::new(path.to_str().unwrap().to_owned(), text.to_owned());
+        index.store_processed_text_in_index(&document);
+
+        let text = "This is another test sentence.";
+        let path = Path::new("test2.txt");
+        let document = super::Document::new(path.to_str().unwrap().to_owned(), text.to_owned());
+        index.store_processed_text_in_index(&document);
+
+        let text = "This is a third test sentence.";
+        let path = Path::new("test3.txt");
+        let document = super::Document::new(path.to_str().unwrap().to_owned(), text.to_owned());
+        index.store_processed_text_in_index(&document);
+
+        index
+    }
+
     #[test]
     fn test_store_processed_text_in_index() {
         use super::Index;
@@ -83,13 +117,15 @@ mod tests {
         let mut index = Index::new();
         let text = "This is a test sentence.";
         let path = Path::new("test.txt");
-        index.store_processed_text_in_index(text, path);
+        let document = super::Document::new(text.to_owned(), path.to_str().unwrap().to_owned());
+        index.store_processed_text_in_index(&document);
 
         assert_eq!(index.num_docs, 1);
         assert_eq!(index.inverted_index.len(), 5);
 
         // Create a HashMap of the expected results
-        let mut expected: HashMap<Term, HashMap<String, u32>> = HashMap::new();
+        let mut expected: HashMap<Term, HashMap<super::Document, u32>> = HashMap::new();
+
         for term in vec![
             Term("This".to_owned()),
             Term("is".to_owned()),
@@ -97,9 +133,9 @@ mod tests {
             Term("test".to_owned()),
             Term("sentence.".to_owned()),
         ] {
-            let mut docs = HashMap::new();
-            docs.insert("test.txt".to_owned(), 1);
-            expected.insert(term, docs);
+            let mut documents = HashMap::new();
+            documents.insert(document.clone(), 1);
+            expected.insert(term, documents);
         }
 
         for (term, docs) in &expected {
@@ -109,27 +145,24 @@ mod tests {
 
     #[test]
     fn test_calculate_idf() {
-        use super::Index;
-        use std::path::Path;
-
-        let mut index = Index::new();
-        let text = "This is a test sentence.";
-        let path = Path::new("test.txt");
-        index.store_processed_text_in_index(text, path);
+        // Create an index with 3 documents
+        let mut index = build_index_with_3_docs();
         index.calculate_idf();
 
-        assert_eq!(index.idf.len(), 5);
-
-        // Create a HashMap of the expected results
+        // Calculate the IDF for each term
         let mut expected: HashMap<Term, f64> = HashMap::new();
+
         for term in vec![
             Term("This".to_owned()),
             Term("is".to_owned()),
             Term("a".to_owned()),
             Term("test".to_owned()),
             Term("sentence.".to_owned()),
+            Term("another".to_owned()),
+            Term("third".to_owned()),
         ] {
-            expected.insert(term, 0.0);
+            let idf = 3.0 / index.inverted_index.get(&term).unwrap().len() as f64;
+            expected.insert(term, idf);
         }
 
         for (term, idf) in &expected {

@@ -38,6 +38,6 @@ fn main() {
     // Print the search results
     println!("Search results:");
     for result in search_results {
-        println!("{} - {}", result.document_path, result.score);
+        println!("{} - {}", result.document, result.score);
     }
 }
