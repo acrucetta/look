@@ -38,10 +38,6 @@ pub fn search(query: &str, index: &Index) -> Vec<SearchResult> {
     // 3. Retrieve relevant documents
     let candidate_documents = retrieve_candidate_documents(&processed_query, index);
 
-    // 4. Rank the documents
-    
-
-    // 5. Return the search results
     rank_documents(&candidate_documents, &query_tfidf, index)
 }
 
@@ -154,8 +150,6 @@ fn rank_documents(
 #[cfg(test)]
 mod tests {
     use std::collections::{HashMap, HashSet};
-
-    
 
     use crate::{
         indexer::{file_processing::Document, Index},
