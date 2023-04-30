@@ -135,14 +135,12 @@ fn rank_documents(
     }
 
     // Sort the documents by score in descending order
-    let mut ranked_documents: Vec<SearchResult> = document_scores
+    let ranked_docs = document_scores
         .iter()
         .map(|(document_path, score)| SearchResult::new(document_path.clone(), *score))
-        .collect();
+        .collect::<Vec<SearchResult>>();
 
-    ranked_documents.sort_unstable_by(|a, b| b.partial_cmp(&a).unwrap());
-
-    ranked_documents
+    ranked_docs
 }
 
 #[cfg(test)]
@@ -157,6 +155,35 @@ mod tests {
         },
     };
 
+    /// Function to create a sample index
+    ///
+    /// # Returns
+    /// * A sample index
+    ///
+    /// The sample index contains the following:
+    /// * Inverted index:
+    ///    * Term: apple
+    ///       * Document: doc1.txt
+    ///         * Term frequency: 2
+    ///      * Document: doc2.txt
+    ///        * Term frequency: 3
+    ///   * Term: banana
+    ///     * Document: doc1.txt
+    ///      * Term frequency: 1
+    ///    * Document: doc3.txt
+    ///     * Term frequency: 1
+    /// * IDF:
+    ///  * Term: apple
+    ///  * IDF: 1.0
+    /// * Term: banana
+    /// * IDF: 1.0
+    /// * Document norms:
+    /// * Document: doc1.txt
+    /// * Norm: 2.236
+    /// * Document: doc2.txt
+    /// * Norm: 3.0
+    /// * Document: doc3.txt
+    /// * Norm: 1.0
     fn create_sample_index() -> Index {
         let mut index = Index::new();
 
@@ -190,6 +217,29 @@ mod tests {
         let query_tfidf = super::calculate_query_tfidf(query, &index);
 
         assert_eq!(query_tfidf.len(), 2);
+    }
+
+    #[test]
+    fn test_getting_document_score() {
+        // Create a sample index
+        let index = create_sample_index();
+
+        // Create a sample query
+        let query = "apple banana";
+
+        // Calculate the query's TF-IDF
+        let query_tfidf = super::calculate_query_tfidf(query, &index);
+
+        // Retrieve the candidate documents
+        let candidate_documents = retrieve_candidate_documents(query, &index);
+
+        // Rank the documents
+        let ranked_documents = rank_documents(&candidate_documents, &query_tfidf, &index);
+
+        // Check the results
+        assert_eq!(ranked_documents.len(), 3);
+        assert_eq!(ranked_documents[0].document_path, "doc1.txt");
+        assert_eq!(ranked_documents[1].document_path, "doc2.txt");
     }
 
     #[test]
