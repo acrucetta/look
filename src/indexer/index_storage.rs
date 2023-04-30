@@ -5,12 +5,14 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::path::Path;
 
+use super::file_processing::Document;
+
 #[derive(Clone, Hash, Eq, PartialEq, Serialize, Deserialize, Debug)]
 pub struct Term(pub String);
 
 #[derive(Clone, Serialize, Deserialize)]
 pub struct Index {
-    pub inverted_index: HashMap<Term, HashMap<String, u32>>,
+    pub inverted_index: HashMap<Term, HashMap<Document, u32>>,
     pub idf: HashMap<Term, f64>,
     pub document_norms: HashMap<String, f64>,
     pub num_docs: usize,

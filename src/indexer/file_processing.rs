@@ -1,10 +1,17 @@
 use crate::data_ingestion;
 use crate::data_ingestion::text_processing::process_text;
 use data_ingestion::file_handler::*;
+use serde::{Deserialize, Serialize};
 use std::fs;
 use std::path::Path;
 
 use super::Index;
+
+#[derive(Debug, Serialize, Deserialize)]
+pub struct Document {
+    pub path: String,
+    pub contents: String,
+}
 
 pub fn process_directory<P: AsRef<Path>>(
     path: P,
