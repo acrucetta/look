@@ -6,13 +6,14 @@ use std::io::prelude::*;
 use std::path::Path;
 
 #[derive(Clone, Hash, Eq, PartialEq, Serialize, Deserialize, Debug)]
-pub struct Term(String);
+pub struct Term(pub String);
 
 #[derive(Clone, Serialize, Deserialize)]
 pub struct Index {
     pub inverted_index: HashMap<Term, HashMap<String, u32>>,
     pub idf: HashMap<Term, f64>,
-    num_docs: usize,
+    pub document_norms: HashMap<String, f64>,
+    pub num_docs: usize,
 }
 
 impl Index {
@@ -20,6 +21,7 @@ impl Index {
         Index {
             inverted_index: HashMap::new(),
             idf: HashMap::new(),
+            document_norms: HashMap::new(),
             num_docs: 0,
         }
     }
@@ -30,23 +32,24 @@ impl Index {
         // Tokenize the processed text
         let tokens = text.split_whitespace().collect::<Vec<&str>>();
 
-        // Increment the number of documents
-        self.num_docs += 1;
-
-        // Insert each token into the index and calculate term frequency
-        let mut term_counts = HashMap::new();
+        // Insert each token into the index and calculate document norms
+        let mut document_tfidf_squared_sum: f64 = 0.0;
         for token in tokens {
             let term = Term(token.to_owned());
-            let count = term_counts.entry(term.clone()).or_insert(0);
-            *count += 1;
+            let entry = self
+                .inverted_index
+                .entry(term.clone())
+                .or_insert_with(HashMap::new);
+            let term_frequency = entry.entry(path_str.clone()).or_insert(0);
+            *term_frequency += 1;
+
+            let idf = self.idf.get(&term).unwrap_or(&1.0);
+            let tf_idf = *term_frequency as f64 * idf;
+            document_tfidf_squared_sum += tf_idf * tf_idf;
         }
 
-        for (term, count) in term_counts {
-            self.inverted_index
-                .entry(term)
-                .or_insert_with(HashMap::new)
-                .insert(path_str.clone(), count);
-        }
+        let document_norm = document_tfidf_squared_sum.sqrt();
+        self.document_norms.insert(path_str, document_norm);
     }
 
     pub fn calculate_idf(&mut self) {

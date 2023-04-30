@@ -1,313 +1,1745 @@
 {
   "inverted_index": {
-    "unknown": {
-      "data/lorem_ipsum.txt": 1
+    "fines": {
+      "personal_data/2023-03-12.md": 1
     },
-    "remain": {
-      "data/lorem_ipsum.txt": 1
+    "ultimas": {
+      "personal_data/2023-03-14.md": 1
     },
-    "##m": {
-      "data/lorem_ipsum.txt": 4
+    "hobbies": {
+      "personal_data/2023-03-11.md": 1
     },
-    "book": {
-      "data/lorem_ipsum.txt": 1
+    "fue": {
+      "personal_data/2023-03-13.md": 1
     },
-    "printer": {
-      "data/lorem_ipsum.txt": 1
+    "dan": {
+      "personal_data/2023-03-11.md": 1
     },
-    "to": {
-      "data/lorem_ipsum.txt": 1
+    "contribuyendo": {
+      "personal_data/2023-03-14.md": 2
     },
-    "was": {
-      "data/lorem_ipsum.txt": 1
+    "exposicion": {
+      "personal_data/2023-03-14.md": 1
     },
-    "type": {
-      "data/lorem_ipsum.txt": 4
+    "ayer": {
+      "personal_data/2023-03-13.md": 2,
+      "personal_data/2023-03-09.md": 2
     },
-    "releas": {
-      "data/lorem_ipsum.txt": 1
+    "aparte": {
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-11.md": 2,
+      "personal_data/2023-03-09.md": 1
+    },
+    "distancia": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "tambien": {
+      "personal_data/2023-03-12.md": 1,
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-09.md": 3
+    },
+    "trabaje": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "cocinado": {
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-11.md": 1
+    },
+    "noches": {
+      "personal_data/2023-03-14.md": 1
+    },
+    "arman": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "poniendole": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "los": {
+      "personal_data/2023-03-11.md": 3,
+      "personal_data/2023-03-12.md": 2
+    },
+    "senti": {
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-09.md": 1
+    },
+    "sabe": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "gap": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "un": {
+      "personal_data/2023-03-14.md": 2,
+      "personal_data/2023-03-12.md": 5,
+      "personal_data/2023-03-09.md": 6,
+      "personal_data/2023-03-13.md": 4,
+      "personal_data/2023-03-06.md": 2,
+      "personal_data/2023-03-11.md": 4
+    },
+    "tuvimos": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "e": {
+      "personal_data/2023-03-12.md": 1
+    },
+    "estan": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "resto": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "ver": {
+      "personal_data/2023-03-14.md": 1
+    },
+    "dentro": {
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-14.md": 1
+    },
+    "chicago": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "siento": {
+      "personal_data/2023-03-12.md": 1,
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-06.md": 1
+    },
+    "poder": {
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-09.md": 2,
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-12.md": 4
+    },
+    "bootstrap": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "compartir": {
+      "personal_data/2023-03-09.md": 2,
+      "personal_data/2023-03-12.md": 1
+    },
+    "practicar": {
+      "personal_data/2023-03-09.md": 2
+    },
+    "cosas": {
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-12.md": 1,
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-13.md": 2
+    },
+    "proyectos": {
+      "personal_data/2023-03-13.md": 2,
+      "personal_data/2023-03-11.md": 4,
+      "personal_data/2023-03-12.md": 2
+    },
+    "contento": {
+      "personal_data/2023-03-12.md": 1
+    },
+    "programar": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "hoy": {
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-06.md": 1
+    },
+    "contribuir": {
+      "personal_data/2023-03-14.md": 2
+    },
+    "cena": {
+      "personal_data/2023-03-14.md": 1
+    },
+    "hacer": {
+      "personal_data/2023-03-06.md": 2,
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-13.md": 1
+    },
+    "clave": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "importante": {
+      "personal_data/2023-03-11.md": 4,
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-13.md": 1
+    },
+    "rohan": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "conversado": {
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-12.md": 1
+    },
+    "nuestras": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "bonita": {
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-09.md": 1
+    },
+    "forma": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "taylor": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "trucar": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "despedidas": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "id": {
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-13.md": 1
+    },
+    "tiempo": {
+      "personal_data/2023-03-11.md": 3,
+      "personal_data/2023-03-13.md": 1
+    },
+    "notas": {
+      "personal_data/2023-03-06.md": 2,
+      "personal_data/2023-03-09.md": 1
+    },
+    "tranquilo": {
+      "personal_data/2023-03-12.md": 1
+    },
+    "probando": {
+      "personal_data/2023-03-06.md": 1
+    },
+    "mart": {
+      "personal_data/2023-03-06.md": 1
+    },
+    "emociona": {
+      "personal_data/2023-03-12.md": 1
+    },
+    "informacion": {
+      "personal_data/2023-03-06.md": 2,
+      "personal_data/2023-03-13.md": 1
+    },
+    "cenar": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "sudhae": {
+      "personal_data/2023-03-06.md": 1
+    },
+    "se": {
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-11.md": 2
+    },
+    "fuera": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "frontend": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "anoche": {
+      "personal_data/2023-03-12.md": 3,
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-14.md": 2,
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-11.md": 1
+    },
+    "final": {
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-06.md": 1
+    },
+    "milena": {
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-12.md": 1
+    },
+    "ido": {
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-14.md": 1
+    },
+    "verla": {
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-14.md": 1
+    },
+    "como": {
+      "personal_data/2023-03-09.md": 2
+    },
+    "tenerla": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "neovim": {
+      "personal_data/2023-03-06.md": 1
+    },
+    "empresa": {
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-14.md": 1
+    },
+    "llamar": {
+      "personal_data/2023-03-11.md": 2
+    },
+    "lentes": {
+      "personal_data/2023-03-14.md": 1
+    },
+    "pueda": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "pero": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "luego": {
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-06.md": 1
+    },
+    "enfocado": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "crecer": {
+      "personal_data/2023-03-14.md": 1
+    },
+    "rato": {
+      "personal_data/2023-03-09.md": 2,
+      "personal_data/2023-03-12.md": 2,
+      "personal_data/2023-03-13.md": 2,
+      "personal_data/2023-03-11.md": 1
+    },
+    "dulces": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "wormhole": {
+      "personal_data/2023-03-12.md": 1
+    },
+    "parte": {
+      "personal_data/2023-03-14.md": 1
+    },
+    "procesar": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "va": {
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-11.md": 1
+    },
+    "fluyen": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "alegra": {
+      "personal_data/2023-03-12.md": 1
+    },
+    "dar": {
+      "personal_data/2023-03-14.md": 1
+    },
+    "journaljournal": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "sentiamos": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "para": {
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-11.md": 4,
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-06.md": 2
+    },
+    "comos": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "explorar": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "terminal": {
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-09.md": 2
+    },
+    "parecio": {
+      "personal_data/2023-03-09.md": 2
+    },
+    "mitch": {
+      "personal_data/2023-03-06.md": 1
+    },
+    "goggins": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "el": {
+      "personal_data/2023-03-14.md": 3,
+      "personal_data/2023-03-06.md": 4,
+      "personal_data/2023-03-13.md": 3,
+      "personal_data/2023-03-09.md": 2,
+      "personal_data/2023-03-11.md": 5
+    },
+    "monteverde": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "visitar": {
+      "personal_data/2023-03-11.md": 2
+    },
+    "tina": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "gustaria": {
+      "personal_data/2023-03-12.md": 1,
+      "personal_data/2023-03-11.md": 2,
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-09.md": 1
+    },
+    "honestidad": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "mama": {
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-13.md": 2,
+      "personal_data/2023-03-06.md": 1
+    },
+    "descansado": {
+      "personal_data/2023-03-14.md": 2
+    },
+    "buena": {
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-13.md": 1
+    },
+    "bueno": {
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-13.md": 2,
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-09.md": 1
+    },
+    "pipelines": {
+      "personal_data/2023-03-06.md": 1
+    },
+    "amigos": {
+      "personal_data/2023-03-12.md": 1
+    },
+    "enseñarle": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "entender": {
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-13.md": 1
+    },
+    "conversar": {
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-12.md": 1
+    },
+    "ser": {
+      "personal_data/2023-03-14.md": 2
+    },
+    "dividirlo": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "no": {
+      "personal_data/2023-03-13.md": 3,
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-14.md": 1
+    },
+    "luz": {
+      "personal_data/2023-03-14.md": 1
+    },
+    "leido": {
+      "personal_data/2023-03-14.md": 1
+    },
+    "esto": {
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-13.md": 2,
+      "personal_data/2023-03-14.md": 1
+    },
+    "son": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "parece": {
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-13.md": 1
+    },
+    "este": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "pienso": {
+      "personal_data/2023-03-11.md": 2,
+      "personal_data/2023-03-14.md": 1
+    },
+    "trabajando": {
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-13.md": 1
+    },
+    "nos": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "ruido": {
+      "personal_data/2023-03-14.md": 1
+    },
+    "desde": {
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-06.md": 1
+    },
+    "resolver": {
+      "personal_data/2023-03-06.md": 1
+    },
+    "personales": {
+      "personal_data/2023-03-12.md": 1
+    },
+    "hermosa": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "porque": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "estoy": {
+      "personal_data/2023-03-14.md": 3,
+      "personal_data/2023-03-09.md": 2,
+      "personal_data/2023-03-11.md": 3,
+      "personal_data/2023-03-06.md": 4,
+      "personal_data/2023-03-12.md": 4,
+      "personal_data/2023-03-13.md": 3
+    },
+    "tu": {
+      "personal_data/2023-03-13.md": 2
+    },
+    "nueva": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "clase": {
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-14.md": 1
+    },
+    "llena": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "la": {
+      "personal_data/2023-03-11.md": 8,
+      "personal_data/2023-03-06.md": 3,
+      "personal_data/2023-03-12.md": 1,
+      "personal_data/2023-03-13.md": 2,
+      "personal_data/2023-03-14.md": 4,
+      "personal_data/2023-03-09.md": 5
+    },
+    "de": {
+      "personal_data/2023-03-06.md": 5,
+      "personal_data/2023-03-13.md": 12,
+      "personal_data/2023-03-11.md": 13,
+      "personal_data/2023-03-12.md": 5,
+      "personal_data/2023-03-14.md": 8,
+      "personal_data/2023-03-09.md": 5
+    },
+    "amamos": {
+      "personal_data/2023-03-11.md": 2
+    },
+    "amistad": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "bien": {
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-13.md": 1
+    },
+    "tarde": {
+      "personal_data/2023-03-14.md": 1
+    },
+    "mas": {
+      "personal_data/2023-03-12.md": 1,
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-06.md": 1
+    },
+    "trabajo": {
+      "personal_data/2023-03-14.md": 4,
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-09.md": 2
+    },
+    "tags": {
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-13.md": 1
     },
     "a": {
-      "data/lorem_ipsum.txt": 2
+      "personal_data/2023-03-06.md": 3,
+      "personal_data/2023-03-12.md": 4,
+      "personal_data/2023-03-13.md": 5,
+      "personal_data/2023-03-11.md": 10,
+      "personal_data/2023-03-14.md": 7,
+      "personal_data/2023-03-09.md": 2
     },
-    "##ise": {
-      "data/lorem_ipsum.txt": 1
+    "tan": {
+      "personal_data/2023-03-14.md": 1
     },
-    "took": {
-      "data/lorem_ipsum.txt": 1
+    "juntos": {
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-12.md": 1,
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-11.md": 1
     },
-    "ip": {
-      "data/lorem_ipsum.txt": 4
+    "naturaleza": {
+      "personal_data/2023-03-11.md": 1
     },
-    "version": {
-      "data/lorem_ipsum.txt": 1
+    "le": {
+      "personal_data/2023-03-11.md": 1
     },
-    "galley": {
-      "data/lorem_ipsum.txt": 1
+    "agrio": {
+      "personal_data/2023-03-11.md": 1
     },
-    "make": {
-      "data/lorem_ipsum.txt": 1
+    "enfocarme": {
+      "personal_data/2023-03-14.md": 1
     },
-    "##t": {
-      "data/lorem_ipsum.txt": 1
+    "papa": {
+      "personal_data/2023-03-11.md": 2
     },
-    "dummi": {
-      "data/lorem_ipsum.txt": 2
+    "rust": {
+      "personal_data/2023-03-11.md": 1
     },
-    "simpli": {
-      "data/lorem_ipsum.txt": 1
+    "buen": {
+      "personal_data/2023-03-09.md": 1
     },
-    "like": {
-      "data/lorem_ipsum.txt": 1
+    "encantado": {
+      "personal_data/2023-03-09.md": 1
     },
-    "desktop": {
-      "data/lorem_ipsum.txt": 1
+    "dias": {
+      "personal_data/2023-03-09.md": 1
     },
-    "publish": {
-      "data/lorem_ipsum.txt": 1
+    "antonia": {
+      "personal_data/2023-03-12.md": 1
     },
-    "popular": {
-      "data/lorem_ipsum.txt": 1
+    "finalmente": {
+      "personal_data/2023-03-14.md": 1
     },
-    "##ng": {
-      "data/lorem_ipsum.txt": 2
+    "elm": {
+      "personal_data/2023-03-12.md": 1,
+      "personal_data/2023-03-13.md": 1
     },
-    "includ": {
-      "data/lorem_ipsum.txt": 1
+    "y": {
+      "personal_data/2023-03-14.md": 6,
+      "personal_data/2023-03-11.md": 11,
+      "personal_data/2023-03-09.md": 9,
+      "personal_data/2023-03-13.md": 10,
+      "personal_data/2023-03-06.md": 6,
+      "personal_data/2023-03-12.md": 8
     },
-    "has": {
-      "data/lorem_ipsum.txt": 2
+    "con": {
+      "personal_data/2023-03-12.md": 4,
+      "personal_data/2023-03-13.md": 5,
+      "personal_data/2023-03-06.md": 9,
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-09.md": 5,
+      "personal_data/2023-03-11.md": 7
     },
-    "scrambl": {
-      "data/lorem_ipsum.txt": 1
+    "triste": {
+      "personal_data/2023-03-11.md": 1
     },
-    "contain": {
-      "data/lorem_ipsum.txt": 1
+    "sunil": {
+      "personal_data/2023-03-06.md": 1
     },
-    "softwar": {
-      "data/lorem_ipsum.txt": 1
+    "price": {
+      "personal_data/2023-03-06.md": 1
     },
-    "of": {
-      "data/lorem_ipsum.txt": 4
+    "caminar": {
+      "personal_data/2023-03-13.md": 1
     },
-    "##sum": {
-      "data/lorem_ipsum.txt": 4
+    "hay": {
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-13.md": 2
     },
-    "five": {
-      "data/lorem_ipsum.txt": 1
+    "apasionada": {
+      "personal_data/2023-03-09.md": 1
     },
-    "##etti": {
-      "data/lorem_ipsum.txt": 2
+    "traccion": {
+      "personal_data/2023-03-06.md": 1
     },
-    "unchang": {
-      "data/lorem_ipsum.txt": 1
+    "vuelo": {
+      "personal_data/2023-03-11.md": 1
     },
-    "sheet": {
-      "data/lorem_ipsum.txt": 1
+    "señal": {
+      "personal_data/2023-03-13.md": 1
     },
-    "industri": {
-      "data/lorem_ipsum.txt": 2
+    "dando": {
+      "personal_data/2023-03-13.md": 1
     },
-    "in": {
-      "data/lorem_ipsum.txt": 1
+    "agraceido": {
+      "personal_data/2023-03-13.md": 1
     },
-    "also": {
-      "data/lorem_ipsum.txt": 1
+    "serio": {
+      "personal_data/2023-03-11.md": 1
     },
-    "page": {
-      "data/lorem_ipsum.txt": 1
+    "partes": {
+      "personal_data/2023-03-13.md": 1
     },
-    "standard": {
-      "data/lorem_ipsum.txt": 1
+    "momentos": {
+      "personal_data/2023-03-11.md": 1
     },
-    "ever": {
-      "data/lorem_ipsum.txt": 1
+    "seguro": {
+      "personal_data/2023-03-13.md": 1
     },
-    "recent": {
-      "data/lorem_ipsum.txt": 1
+    "terminos": {
+      "personal_data/2023-03-13.md": 1
     },
-    "hello": {
-      "data/hello_world.md": 1,
-      "data/hello_world.txt": 1
+    "textura": {
+      "personal_data/2023-03-11.md": 1
     },
-    "1500": {
-      "data/lorem_ipsum.txt": 1
+    "tengo": {
+      "personal_data/2023-03-11.md": 3,
+      "personal_data/2023-03-12.md": 1
     },
-    "text": {
-      "data/lorem_ipsum.txt": 2
+    "nonna": {
+      "personal_data/2023-03-11.md": 1
     },
-    "leap": {
-      "data/lorem_ipsum.txt": 1
+    "historia": {
+      "personal_data/2023-03-13.md": 1
     },
-    "specimen": {
-      "data/lorem_ipsum.txt": 1
+    "aprendiendo": {
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-12.md": 1,
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-13.md": 1
     },
-    "passag": {
-      "data/lorem_ipsum.txt": 1
+    "entiendo": {
+      "personal_data/2023-03-11.md": 1
     },
-    "when": {
-      "data/lorem_ipsum.txt": 1
+    "o": {
+      "personal_data/2023-03-13.md": 1
     },
-    "sinc": {
-      "data/lorem_ipsum.txt": 1
+    "filosofia": {
+      "personal_data/2023-03-09.md": 1
     },
-    "with": {
-      "data/lorem_ipsum.txt": 2
+    "comprosio": {
+      "personal_data/2023-03-13.md": 1
     },
-    "been": {
-      "data/lorem_ipsum.txt": 1
+    "pasado": {
+      "personal_data/2023-03-12.md": 1
     },
-    "##dus": {
-      "data/lorem_ipsum.txt": 1
+    "estaticos": {
+      "personal_data/2023-03-11.md": 1
     },
-    "##s": {
-      "data/lorem_ipsum.txt": 2
+    "ha": {
+      "personal_data/2023-03-09.md": 3
     },
-    "the": {
-      "data/lorem_ipsum.txt": 6
+    "dbt": {
+      "personal_data/2023-03-06.md": 1
     },
-    "is": {
-      "data/lorem_ipsum.txt": 1
+    "mente": {
+      "personal_data/2023-03-12.md": 1,
+      "personal_data/2023-03-13.md": 1
     },
-    "onli": {
-      "data/lorem_ipsum.txt": 1
+    "abajo": {
+      "personal_data/2023-03-09.md": 1
     },
-    "world": {
-      "data/hello_world.md": 1,
-      "data/hello_world.txt": 1
+    "en": {
+      "personal_data/2023-03-14.md": 3,
+      "personal_data/2023-03-12.md": 4,
+      "personal_data/2023-03-11.md": 6,
+      "personal_data/2023-03-09.md": 7,
+      "personal_data/2023-03-06.md": 2,
+      "personal_data/2023-03-13.md": 3
     },
-    "1960s": {
-      "data/lorem_ipsum.txt": 1
+    "apreciar": {
+      "personal_data/2023-03-11.md": 1
     },
-    "and": {
-      "data/lorem_ipsum.txt": 3
+    "gi": {
+      "personal_data/2023-03-09.md": 2
     },
-    "let": {
-      "data/lorem_ipsum.txt": 1
+    "rica": {
+      "personal_data/2023-03-14.md": 1
     },
-    "##rase": {
-      "data/lorem_ipsum.txt": 1
+    "gustado": {
+      "personal_data/2023-03-09.md": 2
     },
-    "print": {
-      "data/lorem_ipsum.txt": 1
+    "hemos": {
+      "personal_data/2023-03-11.md": 1
     },
-    "surviv": {
-      "data/lorem_ipsum.txt": 1
+    "por": {
+      "personal_data/2023-03-13.md": 7,
+      "personal_data/2023-03-12.md": 7,
+      "personal_data/2023-03-06.md": 4,
+      "personal_data/2023-03-09.md": 8,
+      "personal_data/2023-03-11.md": 6,
+      "personal_data/2023-03-14.md": 12
+    },
+    "familia": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "desarrollar": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "flask": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "otra": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "interesante": {
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-13.md": 1
+    },
+    "shai": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "valeria": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "divertido": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "una": {
+      "personal_data/2023-03-09.md": 2,
+      "personal_data/2023-03-13.md": 2,
+      "personal_data/2023-03-14.md": 1
+    },
+    "experimentar": {
+      "personal_data/2023-03-06.md": 1
+    },
+    "tecnicas": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "mejor": {
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-13.md": 1
+    },
+    "bastante": {
+      "personal_data/2023-03-11.md": 2,
+      "personal_data/2023-03-09.md": 2
+    },
+    "mejorar": {
+      "personal_data/2023-03-06.md": 1
+    },
+    "faciles": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "pendiente": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "aprendido": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "junto": {
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-12.md": 1
+    },
+    "interesantes": {
+      "personal_data/2023-03-14.md": 1
+    },
+    "poco": {
+      "personal_data/2023-03-14.md": 2,
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-12.md": 1,
+      "personal_data/2023-03-09.md": 3,
+      "personal_data/2023-03-11.md": 2
+    },
+    "bjj": {
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-14.md": 1
+    },
+    "gente": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "hace": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "programming": {
+      "personal_data/2023-03-12.md": 1
+    },
+    "visto": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "david": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "apego": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "mañana": {
+      "personal_data/2023-03-12.md": 1,
+      "personal_data/2023-03-06.md": 1
+    },
+    "leyendo": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "revisar": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "tutorial": {
+      "personal_data/2023-03-11.md": 3
+    },
+    "trabajar": {
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-12.md": 3,
+      "personal_data/2023-03-13.md": 1
+    },
+    "diferentes": {
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-13.md": 1
+    },
+    "me": {
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-09.md": 7,
+      "personal_data/2023-03-12.md": 6,
+      "personal_data/2023-03-11.md": 4,
+      "personal_data/2023-03-13.md": 3
+    },
+    "relacion": {
+      "personal_data/2023-03-12.md": 1
+    },
+    "gusto": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "kelly": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "langchain": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "menos": {
+      "personal_data/2023-03-14.md": 1
+    },
+    "reporte": {
+      "personal_data/2023-03-06.md": 1
+    },
+    "tener": {
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-14.md": 3
+    },
+    "frontends": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "poc": {
+      "personal_data/2023-03-06.md": 1
+    },
+    "entrenamiento": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "enfocar": {
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-13.md": 1
+    },
+    "despertado": {
+      "personal_data/2023-03-12.md": 1
+    },
+    "del": {
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-06.md": 1
+    },
+    "generate": {
+      "personal_data/2023-03-06.md": 1
+    },
+    "viajes": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "hecho": {
+      "personal_data/2023-03-11.md": 2
+    },
+    "seguir": {
+      "personal_data/2023-03-13.md": 6,
+      "personal_data/2023-03-14.md": 4,
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-12.md": 1,
+      "personal_data/2023-03-09.md": 2,
+      "personal_data/2023-03-11.md": 3
+    },
+    "asi": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "vida": {
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-11.md": 3
+    },
+    "mucho": {
+      "personal_data/2023-03-11.md": 2,
+      "personal_data/2023-03-09.md": 2
+    },
+    "escuchando": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "conversacion": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "llenan": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "puede": {
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-13.md": 1
+    },
+    "articulos": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "futuro": {
+      "personal_data/2023-03-12.md": 1
+    },
+    "salido": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "maneje": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "muy": {
+      "personal_data/2023-03-09.md": 2,
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-13.md": 1
+    },
+    "agradecido": {
+      "personal_data/2023-03-14.md": 4,
+      "personal_data/2023-03-06.md": 2,
+      "personal_data/2023-03-11.md": 3,
+      "personal_data/2023-03-12.md": 3,
+      "personal_data/2023-03-13.md": 2,
+      "personal_data/2023-03-09.md": 3
+    },
+    "saber": {
+      "personal_data/2023-03-09.md": 1
     },
     "al": {
-      "data/lorem_ipsum.txt": 1
+      "personal_data/2023-03-09.md": 2,
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-11.md": 1
     },
-    "essenti": {
-      "data/lorem_ipsum.txt": 1
+    "diario": {
+      "personal_data/2023-03-06.md": 1
     },
-    "into": {
-      "data/lorem_ipsum.txt": 1
+    "libros": {
+      "personal_data/2023-03-14.md": 1
     },
-    "centuri": {
-      "data/lorem_ipsum.txt": 1
+    "tenemos": {
+      "personal_data/2023-03-11.md": 1
     },
-    "##maker": {
-      "data/lorem_ipsum.txt": 1
+    "functional": {
+      "personal_data/2023-03-12.md": 1
     },
-    "lore": {
-      "data/lorem_ipsum.txt": 4
+    "caroline": {
+      "personal_data/2023-03-11.md": 2
     },
-    "but": {
-      "data/lorem_ipsum.txt": 1
+    "da": {
+      "personal_data/2023-03-12.md": 1
     },
-    "electron": {
-      "data/lorem_ipsum.txt": 1
+    "oportunidades": {
+      "personal_data/2023-03-14.md": 1
     },
-    "an": {
-      "data/lorem_ipsum.txt": 1
+    "nada": {
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-09.md": 1
     },
-    "more": {
-      "data/lorem_ipsum.txt": 1
+    "complicacion": {
+      "personal_data/2023-03-13.md": 1
     },
-    "not": {
-      "data/lorem_ipsum.txt": 1
+    "si": {
+      "personal_data/2023-03-13.md": 1
     },
-    "it": {
-      "data/lorem_ipsum.txt": 3
+    "cuando": {
+      "personal_data/2023-03-13.md": 2,
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-12.md": 1
+    },
+    "abuela": {
+      "personal_data/2023-03-11.md": 2
+    },
+    "voy": {
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-06.md": 1
+    },
+    "dia": {
+      "personal_data/2023-03-06.md": 4,
+      "personal_data/2023-03-13.md": 2,
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-11.md": 3,
+      "personal_data/2023-03-12.md": 1
+    },
+    "dijo": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "uno": {
+      "personal_data/2023-03-09.md": 2,
+      "personal_data/2023-03-13.md": 4
+    },
+    "interesan": {
+      "personal_data/2023-03-12.md": 1
+    },
+    "programacion": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "chance": {
+      "personal_data/2023-03-12.md": 1
+    },
+    "pantalla": {
+      "personal_data/2023-03-14.md": 1
+    },
+    "fp": {
+      "personal_data/2023-03-11.md": 2,
+      "personal_data/2023-03-13.md": 1
+    },
+    "leer": {
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-12.md": 2
+    },
+    "compartido": {
+      "personal_data/2023-03-11.md": 3,
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-09.md": 2,
+      "personal_data/2023-03-12.md": 2
+    },
+    "quien": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "cariño": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "vez": {
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-06.md": 1
+    },
+    "utilizar": {
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-14.md": 1
+    },
+    "es": {
+      "personal_data/2023-03-09.md": 2,
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-13.md": 6,
+      "personal_data/2023-03-11.md": 4
+    },
+    "apreciarla": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "nuevo": {
+      "personal_data/2023-03-12.md": 1,
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-06.md": 2
+    },
+    "gaby": {
+      "personal_data/2023-03-12.md": 1
+    },
+    "foco": {
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-06.md": 1
+    },
+    "emocionado": {
+      "personal_data/2023-03-12.md": 1,
+      "personal_data/2023-03-13.md": 1
+    },
+    "pareja": {
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-13.md": 1
+    },
+    "complementos": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "haber": {
+      "personal_data/2023-03-06.md": 3,
+      "personal_data/2023-03-09.md": 4,
+      "personal_data/2023-03-13.md": 4,
+      "personal_data/2023-03-14.md": 5,
+      "personal_data/2023-03-12.md": 5,
+      "personal_data/2023-03-11.md": 4
+    },
+    "algo": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "que": {
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-11.md": 16,
+      "personal_data/2023-03-12.md": 2,
+      "personal_data/2023-03-13.md": 4,
+      "personal_data/2023-03-09.md": 6
+    },
+    "he": {
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-11.md": 3
+    },
+    "lo": {
+      "personal_data/2023-03-13.md": 3,
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-14.md": 1
+    },
+    "especialmente": {
+      "personal_data/2023-03-11.md": 2,
+      "personal_data/2023-03-12.md": 1
+    },
+    "ocaml": {
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-12.md": 1
+    },
+    "sobre": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "sin": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "mientras": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "journal": {
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-13.md": 1
+    },
+    "noche": {
+      "personal_data/2023-03-14.md": 2
+    },
+    "fin": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "visualizar": {
+      "personal_data/2023-03-12.md": 1
+    },
+    "vi": {
+      "personal_data/2023-03-09.md": 2
+    },
+    "vivimos": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "motivado": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "cada": {
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-11.md": 2
+    },
+    "venido": {
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-12.md": 1
+    },
+    "ir": {
+      "personal_data/2023-03-12.md": 1,
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-06.md": 1
+    },
+    "mi": {
+      "personal_data/2023-03-12.md": 1,
+      "personal_data/2023-03-09.md": 2,
+      "personal_data/2023-03-06.md": 2,
+      "personal_data/2023-03-11.md": 7,
+      "personal_data/2023-03-13.md": 3,
+      "personal_data/2023-03-14.md": 3
+    },
+    "cariñosa": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "nuestro": {
+      "personal_data/2023-03-12.md": 1
+    },
+    "20230314": {
+      "personal_data/2023-03-14.md": 1
+    },
+    "ella": {
+      "personal_data/2023-03-09.md": 2,
+      "personal_data/2023-03-11.md": 1
+    },
+    "docket": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "aliza": {
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-12.md": 2,
+      "personal_data/2023-03-06.md": 1
+    },
+    "organizar": {
+      "personal_data/2023-03-06.md": 1
+    },
+    "embargo": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "haciendo": {
+      "personal_data/2023-03-13.md": 2
+    },
+    "arriba": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "esta": {
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-11.md": 4,
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-12.md": 1,
+      "personal_data/2023-03-13.md": 4
+    },
+    "las": {
+      "personal_data/2023-03-09.md": 1,
+      "personal_data/2023-03-06.md": 3,
+      "personal_data/2023-03-13.md": 2,
+      "personal_data/2023-03-11.md": 2
+    },
+    "cuanto": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "practicando": {
+      "personal_data/2023-03-14.md": 1,
+      "personal_data/2023-03-09.md": 1
+    },
+    "20230313": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "estas": {
+      "personal_data/2023-03-14.md": 1
+    },
+    "personas": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "practica": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "aprendi": {
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-09.md": 2
+    },
+    "algunos": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "vidas": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "mis": {
+      "personal_data/2023-03-06.md": 1,
+      "personal_data/2023-03-11.md": 3,
+      "personal_data/2023-03-09.md": 1
+    },
+    "entra": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "aliases": {
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-14.md": 1
+    },
+    "planificar": {
+      "personal_data/2023-03-11.md": 1,
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-14.md": 1
+    },
+    "sincronizar": {
+      "personal_data/2023-03-06.md": 1
+    },
+    "correr": {
+      "personal_data/2023-03-12.md": 1
+    },
+    "continuar": {
+      "personal_data/2023-03-06.md": 1
+    },
+    "comida": {
+      "personal_data/2023-03-06.md": 1
+    },
+    "podria": {
+      "personal_data/2023-03-14.md": 1
+    },
+    "semana": {
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-11.md": 3,
+      "personal_data/2023-03-12.md": 1
+    },
+    "emocion": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "truco": {
+      "personal_data/2023-03-13.md": 1
+    },
+    "note": {
+      "personal_data/2023-03-09.md": 1
+    },
+    "pronto": {
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-14.md": 2,
+      "personal_data/2023-03-11.md": 2
+    },
+    "problema": {
+      "personal_data/2023-03-06.md": 1
+    },
+    "pensado": {
+      "personal_data/2023-03-11.md": 1
+    },
+    "formas": {
+      "personal_data/2023-03-13.md": 1,
+      "personal_data/2023-03-06.md": 1
+    },
+    "aprender": {
+      "personal_data/2023-03-12.md": 1
+    },
+    "persona": {
+      "personal_data/2023-03-09.md": 3
     }
   },
   "idf": {
-    "into": 1.0986122886681098,
-    "to": 1.0986122886681098,
-    "the": 1.0986122886681098,
-    "standard": 1.0986122886681098,
-    "simpli": 1.0986122886681098,
-    "desktop": 1.0986122886681098,
-    "is": 1.0986122886681098,
-    "##rase": 1.0986122886681098,
-    "it": 1.0986122886681098,
-    "galley": 1.0986122886681098,
-    "1960s": 1.0986122886681098,
-    "more": 1.0986122886681098,
-    "##sum": 1.0986122886681098,
-    "when": 1.0986122886681098,
-    "electron": 1.0986122886681098,
-    "not": 1.0986122886681098,
-    "version": 1.0986122886681098,
-    "##m": 1.0986122886681098,
-    "a": 1.0986122886681098,
-    "took": 1.0986122886681098,
-    "contain": 1.0986122886681098,
-    "softwar": 1.0986122886681098,
-    "specimen": 1.0986122886681098,
-    "sinc": 1.0986122886681098,
-    "and": 1.0986122886681098,
-    "like": 1.0986122886681098,
-    "has": 1.0986122886681098,
-    "five": 1.0986122886681098,
-    "an": 1.0986122886681098,
-    "with": 1.0986122886681098,
-    "scrambl": 1.0986122886681098,
-    "but": 1.0986122886681098,
-    "essenti": 1.0986122886681098,
-    "##t": 1.0986122886681098,
-    "onli": 1.0986122886681098,
-    "unknown": 1.0986122886681098,
-    "of": 1.0986122886681098,
-    "hello": 0.4054651081081644,
-    "text": 1.0986122886681098,
-    "##s": 1.0986122886681098,
-    "sheet": 1.0986122886681098,
-    "dummi": 1.0986122886681098,
-    "includ": 1.0986122886681098,
-    "ip": 1.0986122886681098,
-    "##etti": 1.0986122886681098,
-    "ever": 1.0986122886681098,
-    "##ise": 1.0986122886681098,
-    "also": 1.0986122886681098,
-    "print": 1.0986122886681098,
-    "unchang": 1.0986122886681098,
-    "publish": 1.0986122886681098,
-    "##ng": 1.0986122886681098,
-    "book": 1.0986122886681098,
-    "let": 1.0986122886681098,
-    "al": 1.0986122886681098,
-    "centuri": 1.0986122886681098,
-    "remain": 1.0986122886681098,
-    "surviv": 1.0986122886681098,
-    "industri": 1.0986122886681098,
-    "was": 1.0986122886681098,
-    "recent": 1.0986122886681098,
-    "##maker": 1.0986122886681098,
-    "##dus": 1.0986122886681098,
-    "in": 1.0986122886681098,
-    "releas": 1.0986122886681098,
-    "been": 1.0986122886681098,
-    "type": 1.0986122886681098,
-    "passag": 1.0986122886681098,
-    "1500": 1.0986122886681098,
-    "world": 0.4054651081081644,
-    "popular": 1.0986122886681098,
-    "make": 1.0986122886681098,
-    "page": 1.0986122886681098,
-    "printer": 1.0986122886681098,
-    "lore": 1.0986122886681098,
-    "leap": 1.0986122886681098
+    "llena": null,
+    "partes": null,
+    "kelly": null,
+    "aprendi": null,
+    "hoy": null,
+    "apego": null,
+    "cuando": null,
+    "tags": null,
+    "amamos": null,
+    "porque": null,
+    "mejor": null,
+    "este": null,
+    "emocion": null,
+    "ella": null,
+    "organizar": null,
+    "aparte": null,
+    "mucho": null,
+    "vidas": null,
+    "fp": null,
+    "rust": null,
+    "señal": null,
+    "visto": null,
+    "saber": null,
+    "fue": null,
+    "juntos": null,
+    "el": null,
+    "empresa": null,
+    "leyendo": null,
+    "senti": null,
+    "aprendido": null,
+    "complicacion": null,
+    "mas": null,
+    "traccion": null,
+    "textura": null,
+    "cariñosa": null,
+    "estas": null,
+    "price": null,
+    "podria": null,
+    "tiempo": null,
+    "pipelines": null,
+    "reporte": null,
+    "arman": null,
+    "practicar": null,
+    "otra": null,
+    "frontends": null,
+    "seguir": null,
+    "vida": null,
+    "agradecido": null,
+    "practicando": null,
+    "pronto": null,
+    "cada": null,
+    "enseñarle": null,
+    "ha": null,
+    "tina": null,
+    "gustado": null,
+    "visitar": null,
+    "dias": null,
+    "problema": null,
+    "sabe": null,
+    "monteverde": null,
+    "dentro": null,
+    "importante": null,
+    "dulces": null,
+    "le": null,
+    "personas": null,
+    "note": null,
+    "practica": null,
+    "cocinado": null,
+    "gente": null,
+    "comida": null,
+    "pueda": null,
+    "gusto": null,
+    "gustaria": null,
+    "fuera": null,
+    "verla": null,
+    "del": null,
+    "escuchando": null,
+    "hemos": null,
+    "dan": null,
+    "dar": null,
+    "formas": null,
+    "bueno": null,
+    "continuar": null,
+    "pantalla": null,
+    "nuevo": null,
+    "hermosa": null,
+    "divertido": null,
+    "gaby": null,
+    "nuestro": null,
+    "una": null,
+    "estan": null,
+    "dando": null,
+    "en": null,
+    "para": null,
+    "tenerla": null,
+    "clave": null,
+    "pasado": null,
+    "trabajar": null,
+    "tecnicas": null,
+    "trucar": null,
+    "taylor": null,
+    "trabajo": null,
+    "oportunidades": null,
+    "dijo": null,
+    "pareja": null,
+    "siento": null,
+    "personales": null,
+    "familia": null,
+    "foco": null,
+    "hacer": null,
+    "ido": null,
+    "fluyen": null,
+    "filosofia": null,
+    "de": null,
+    "nos": null,
+    "por": null,
+    "salido": null,
+    "pienso": null,
+    "haciendo": null,
+    "apasionada": null,
+    "luz": null,
+    "antonia": null,
+    "mi": null,
+    "las": null,
+    "algo": null,
+    "persona": null,
+    "aprender": null,
+    "agraceido": null,
+    "conversar": null,
+    "journal": null,
+    "gi": null,
+    "bonita": null,
+    "con": null,
+    "interesan": null,
+    "quien": null,
+    "algunos": null,
+    "procesar": null,
+    "milena": null,
+    "ser": null,
+    "finalmente": null,
+    "naturaleza": null,
+    "tener": null,
+    "lo": null,
+    "relacion": null,
+    "noche": null,
+    "aliases": null,
+    "notas": null,
+    "parecio": null,
+    "aliza": null,
+    "bastante": null,
+    "id": null,
+    "pendiente": null,
+    "shai": null,
+    "caminar": null,
+    "apreciarla": null,
+    "anoche": null,
+    "bootstrap": null,
+    "la": null,
+    "menos": null,
+    "lentes": null,
+    "hace": null,
+    "complementos": null,
+    "es": null,
+    "distancia": null,
+    "nonna": null,
+    "hay": null,
+    "son": null,
+    "bjj": null,
+    "despertado": null,
+    "frontend": null,
+    "que": null,
+    "cosas": null,
+    "no": null,
+    "encantado": null,
+    "abuela": null,
+    "pensado": null,
+    "interesante": null,
+    "probando": null,
+    "alegra": null,
+    "tranquilo": null,
+    "estaticos": null,
+    "proyectos": null,
+    "buena": null,
+    "comos": null,
+    "estoy": null,
+    "aprendiendo": null,
+    "dividirlo": null,
+    "experimentar": null,
+    "apreciar": null,
+    "conversacion": null,
+    "enfocarme": null,
+    "puede": null,
+    "tenemos": null,
+    "programacion": null,
+    "me": null,
+    "valeria": null,
+    "papa": null,
+    "libros": null,
+    "vuelo": null,
+    "faciles": null,
+    "como": null,
+    "ruido": null,
+    "functional": null,
+    "david": null,
+    "entrenamiento": null,
+    "cena": null,
+    "viajes": null,
+    "entender": null,
+    "un": null,
+    "voy": null,
+    "ocaml": null,
+    "generate": null,
+    "vivimos": null,
+    "entiendo": null,
+    "hecho": null,
+    "poc": null,
+    "sunil": null,
+    "asi": null,
+    "ir": null,
+    "descansado": null,
+    "tuvimos": null,
+    "seguro": null,
+    "cuanto": null,
+    "rato": null,
+    "nueva": null,
+    "maneje": null,
+    "amigos": null,
+    "20230313": null,
+    "poniendole": null,
+    "amistad": null,
+    "diferentes": null,
+    "luego": null,
+    "haber": null,
+    "mis": null,
+    "resto": null,
+    "enfocar": null,
+    "buen": null,
+    "desarrollar": null,
+    "poder": null,
+    "revisar": null,
+    "dia": null,
+    "arriba": null,
+    "dbt": null,
+    "ayer": null,
+    "hobbies": null,
+    "junto": null,
+    "leer": null,
+    "compartir": null,
+    "flask": null,
+    "parte": null,
+    "explorar": null,
+    "contento": null,
+    "cariño": null,
+    "final": null,
+    "y": null,
+    "sincronizar": null,
+    "sentiamos": null,
+    "articulos": null,
+    "momentos": null,
+    "utilizar": null,
+    "gap": null,
+    "trabajando": null,
+    "resolver": null,
+    "venido": null,
+    "vi": null,
+    "tambien": null,
+    "programar": null,
+    "fin": null,
+    "mañana": null,
+    "truco": null,
+    "agrio": null,
+    "neovim": null,
+    "journaljournal": null,
+    "va": null,
+    "uno": null,
+    "los": null,
+    "nuestras": null,
+    "contribuyendo": null,
+    "e": null,
+    "forma": null,
+    "elm": null,
+    "muy": null,
+    "diario": null,
+    "terminal": null,
+    "despedidas": null,
+    "chance": null,
+    "sin": null,
+    "parece": null,
+    "wormhole": null,
+    "comprosio": null,
+    "entra": null,
+    "terminos": null,
+    "sobre": null,
+    "visualizar": null,
+    "esta": null,
+    "conversado": null,
+    "tutorial": null,
+    "si": null,
+    "trabaje": null,
+    "serio": null,
+    "llamar": null,
+    "he": null,
+    "sudhae": null,
+    "nada": null,
+    "planificar": null,
+    "futuro": null,
+    "especialmente": null,
+    "esto": null,
+    "vez": null,
+    "tan": null,
+    "compartido": null,
+    "crecer": null,
+    "langchain": null,
+    "correr": null,
+    "llenan": null,
+    "docket": null,
+    "pero": null,
+    "mientras": null,
+    "20230314": null,
+    "mart": null,
+    "tu": null,
+    "mitch": null,
+    "historia": null,
+    "mejorar": null,
+    "semana": null,
+    "rohan": null,
+    "exposicion": null,
+    "o": null,
+    "chicago": null,
+    "tarde": null,
+    "a": null,
+    "tengo": null,
+    "enfocado": null,
+    "rica": null,
+    "motivado": null,
+    "se": null,
+    "ultimas": null,
+    "emocionado": null,
+    "noches": null,
+    "abajo": null,
+    "poco": null,
+    "mente": null,
+    "al": null,
+    "triste": null,
+    "da": null,
+    "fines": null,
+    "caroline": null,
+    "contribuir": null,
+    "cenar": null,
+    "goggins": null,
+    "ver": null,
+    "bien": null,
+    "emociona": null,
+    "honestidad": null,
+    "mama": null,
+    "programming": null,
+    "leido": null,
+    "informacion": null,
+    "clase": null,
+    "embargo": null,
+    "desde": null,
+    "interesantes": null
   },
-  "num_docs": 3
+  "document_norms": {
+    "personal_data/2023-03-11.md": 67.38694235532579,
+    "personal_data/2023-03-12.md": 29.68164415931166,
+    "personal_data/2023-03-13.md": 43.439613257946945,
+    "personal_data/2023-03-14.md": 38.01315561749642,
+    "personal_data/2023-03-09.md": 37.78888725538237,
+    "personal_data/2023-03-06.md": 26.739483914241877
+  },
+  "num_docs": 0
 }
