@@ -4,11 +4,11 @@ use data_ingestion::file_handler::*;
 use std::fs;
 use std::path::Path;
 
-use super::IndexStorage;
+use super::Index;
 
 pub fn process_directory<P: AsRef<Path>>(
     path: P,
-    index: &mut IndexStorage,
+    index: &mut Index,
 ) -> Result<(), Box<dyn std::error::Error>> {
     let path = path.as_ref();
     if path.is_dir() {
@@ -30,7 +30,7 @@ pub fn process_directory<P: AsRef<Path>>(
 
 pub fn process_file<P: AsRef<Path>>(
     path: P,
-    index: &mut IndexStorage,
+    index: &mut Index,
 ) -> Result<(), Box<dyn std::error::Error>> {
     let path = path.as_ref();
     let file_extension = path.extension().unwrap().to_str().unwrap();
@@ -66,18 +66,18 @@ mod tests {
     #[test]
     fn test_process_file() {
         let file_path = "data/lorem_ipsum.txt";
-        let mut index = super::IndexStorage::new();
+        let mut index = super::Index::new();
         super::process_file(file_path, &mut index).unwrap();
-        print!("{:?}", index.index);
-        assert_eq!(index.index.len(), 74);
+        print!("{:?}", index.inverted_index);
+        assert_eq!(index.inverted_index.len(), 74);
     }
 
     #[test]
     fn test_process_directory() {
         let dir_path = "data";
-        let mut index = super::IndexStorage::new();
+        let mut index = super::Index::new();
         super::process_directory(dir_path, &mut index).unwrap();
-        print!("{:?}", index.index);
-        assert_eq!(index.index.len(), 3);
+        print!("{:?}", index.inverted_index);
+        assert_eq!(index.inverted_index.len(), 3);
     }
 }

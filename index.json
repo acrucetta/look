@@ -1,0 +1,313 @@
+{
+  "inverted_index": {
+    "unknown": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "remain": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "##m": {
+      "data/lorem_ipsum.txt": 4
+    },
+    "book": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "printer": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "to": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "was": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "type": {
+      "data/lorem_ipsum.txt": 4
+    },
+    "releas": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "a": {
+      "data/lorem_ipsum.txt": 2
+    },
+    "##ise": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "took": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "ip": {
+      "data/lorem_ipsum.txt": 4
+    },
+    "version": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "galley": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "make": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "##t": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "dummi": {
+      "data/lorem_ipsum.txt": 2
+    },
+    "simpli": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "like": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "desktop": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "publish": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "popular": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "##ng": {
+      "data/lorem_ipsum.txt": 2
+    },
+    "includ": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "has": {
+      "data/lorem_ipsum.txt": 2
+    },
+    "scrambl": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "contain": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "softwar": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "of": {
+      "data/lorem_ipsum.txt": 4
+    },
+    "##sum": {
+      "data/lorem_ipsum.txt": 4
+    },
+    "five": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "##etti": {
+      "data/lorem_ipsum.txt": 2
+    },
+    "unchang": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "sheet": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "industri": {
+      "data/lorem_ipsum.txt": 2
+    },
+    "in": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "also": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "page": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "standard": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "ever": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "recent": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "hello": {
+      "data/hello_world.md": 1,
+      "data/hello_world.txt": 1
+    },
+    "1500": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "text": {
+      "data/lorem_ipsum.txt": 2
+    },
+    "leap": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "specimen": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "passag": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "when": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "sinc": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "with": {
+      "data/lorem_ipsum.txt": 2
+    },
+    "been": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "##dus": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "##s": {
+      "data/lorem_ipsum.txt": 2
+    },
+    "the": {
+      "data/lorem_ipsum.txt": 6
+    },
+    "is": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "onli": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "world": {
+      "data/hello_world.md": 1,
+      "data/hello_world.txt": 1
+    },
+    "1960s": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "and": {
+      "data/lorem_ipsum.txt": 3
+    },
+    "let": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "##rase": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "print": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "surviv": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "al": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "essenti": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "into": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "centuri": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "##maker": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "lore": {
+      "data/lorem_ipsum.txt": 4
+    },
+    "but": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "electron": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "an": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "more": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "not": {
+      "data/lorem_ipsum.txt": 1
+    },
+    "it": {
+      "data/lorem_ipsum.txt": 3
+    }
+  },
+  "idf": {
+    "into": 1.0986122886681098,
+    "to": 1.0986122886681098,
+    "the": 1.0986122886681098,
+    "standard": 1.0986122886681098,
+    "simpli": 1.0986122886681098,
+    "desktop": 1.0986122886681098,
+    "is": 1.0986122886681098,
+    "##rase": 1.0986122886681098,
+    "it": 1.0986122886681098,
+    "galley": 1.0986122886681098,
+    "1960s": 1.0986122886681098,
+    "more": 1.0986122886681098,
+    "##sum": 1.0986122886681098,
+    "when": 1.0986122886681098,
+    "electron": 1.0986122886681098,
+    "not": 1.0986122886681098,
+    "version": 1.0986122886681098,
+    "##m": 1.0986122886681098,
+    "a": 1.0986122886681098,
+    "took": 1.0986122886681098,
+    "contain": 1.0986122886681098,
+    "softwar": 1.0986122886681098,
+    "specimen": 1.0986122886681098,
+    "sinc": 1.0986122886681098,
+    "and": 1.0986122886681098,
+    "like": 1.0986122886681098,
+    "has": 1.0986122886681098,
+    "five": 1.0986122886681098,
+    "an": 1.0986122886681098,
+    "with": 1.0986122886681098,
+    "scrambl": 1.0986122886681098,
+    "but": 1.0986122886681098,
+    "essenti": 1.0986122886681098,
+    "##t": 1.0986122886681098,
+    "onli": 1.0986122886681098,
+    "unknown": 1.0986122886681098,
+    "of": 1.0986122886681098,
+    "hello": 0.4054651081081644,
+    "text": 1.0986122886681098,
+    "##s": 1.0986122886681098,
+    "sheet": 1.0986122886681098,
+    "dummi": 1.0986122886681098,
+    "includ": 1.0986122886681098,
+    "ip": 1.0986122886681098,
+    "##etti": 1.0986122886681098,
+    "ever": 1.0986122886681098,
+    "##ise": 1.0986122886681098,
+    "also": 1.0986122886681098,
+    "print": 1.0986122886681098,
+    "unchang": 1.0986122886681098,
+    "publish": 1.0986122886681098,
+    "##ng": 1.0986122886681098,
+    "book": 1.0986122886681098,
+    "let": 1.0986122886681098,
+    "al": 1.0986122886681098,
+    "centuri": 1.0986122886681098,
+    "remain": 1.0986122886681098,
+    "surviv": 1.0986122886681098,
+    "industri": 1.0986122886681098,
+    "was": 1.0986122886681098,
+    "recent": 1.0986122886681098,
+    "##maker": 1.0986122886681098,
+    "##dus": 1.0986122886681098,
+    "in": 1.0986122886681098,
+    "releas": 1.0986122886681098,
+    "been": 1.0986122886681098,
+    "type": 1.0986122886681098,
+    "passag": 1.0986122886681098,
+    "1500": 1.0986122886681098,
+    "world": 0.4054651081081644,
+    "popular": 1.0986122886681098,
+    "make": 1.0986122886681098,
+    "page": 1.0986122886681098,
+    "printer": 1.0986122886681098,
+    "lore": 1.0986122886681098,
+    "leap": 1.0986122886681098
+  },
+  "num_docs": 3
+}
