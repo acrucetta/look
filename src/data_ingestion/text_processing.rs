@@ -1,6 +1,4 @@
-use rust_stemmers::{Algorithm, Stemmer};
 use unicode_segmentation::UnicodeSegmentation;
-use whatlang::Lang;
 
 pub fn process_text(text: &str) -> String {
     // Step 1: Convert text to lowercase
@@ -94,22 +92,6 @@ mod tests {
         let expected_output = "hello world";
         let output = process_text(input);
         assert_eq!(output, expected_output);
-    }
-
-    #[test]
-    fn test_stemmer() {
-        let stemmer = Stemmer::create(Algorithm::English);
-        let tests: Vec<(&str, &str)> = vec![
-            ("fruitless", "fruitless"),
-            ("fruitlessly", "fruitless"),
-            ("fruitlessness", "fruitless"),
-            ("fruition", "fruition"),
-        ];
-
-        for (input, expected_output) in tests {
-            let output = stemmer.stem(input);
-            assert_eq!(output, expected_output);
-        }
     }
 
     #[test]
