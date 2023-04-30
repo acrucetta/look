@@ -73,9 +73,43 @@ impl Index {
     }
 
     pub fn save_index_to_json_file(&self, output_path: &Path) -> std::io::Result<()> {
-        let json_data = serde_json::to_string_pretty(&self)?;
+        // We need to convert the HashMaps to Vectors of tuples to be able to serialize them
+        // to JSON
+        let inverted_index = self
+            .inverted_index
+            .iter()
+            .map(|(term, docs)| {
+                (
+                    term.clone(),
+                    docs.iter()
+                        .map(|(doc, freq)| (doc.clone(), freq.clone()))
+                        .collect::<Vec<(Document, u32)>>(),
+                )
+            })
+            .collect::<Vec<(Term, Vec<(Document, u32)>)>>();
+
+        let idf = self
+            .idf
+            .iter()
+            .map(|(term, idf)| (term.clone(), idf.clone()))
+            .collect::<Vec<(Term, f64)>>();
+
+        let document_norms = self
+            .document_norms
+            .iter()
+            .map(|(doc, norm)| (doc.clone(), norm.clone()))
+            .collect::<Vec<(Document, f64)>>();
+
+        let index = serde_json::json!({
+            "inverted_index": inverted_index,
+            "idf": idf,
+            "document_norms": document_norms,
+            "num_docs": self.num_docs,
+        });
+
         let mut file = File::create(output_path)?;
-        file.write_all(json_data.as_bytes())?;
+        file.write_all(index.to_string().as_bytes())?;
+
         Ok(())
     }
 }

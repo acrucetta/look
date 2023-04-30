@@ -6,7 +6,7 @@ use indexer::Index;
 use std::path::Path;
 
 fn main() {
-    let dir_path = "personal_data";
+    let dir_path = "data";
     let mut index = Index::new();
 
     // Update your `process_file` function to accept a `&mut HashMap<String, Vec<String>>` argument and pass it to `store_processed_text_in_index`
