@@ -52,7 +52,16 @@ pub fn process_file<P: AsRef<Path>>(
     index: &mut Index,
 ) -> Result<(), Box<dyn std::error::Error>> {
     let path = path.as_ref();
-    let file_extension = path.extension().unwrap().to_str().unwrap();
+
+    let file_extension = match {
+        let extension = path.extension();
+        extension.and_then(|s| s.to_str())
+    } {
+        Some(extension) => extension,
+        // If the file has no extension, we'll skip it with a warning.
+        None => return Err(From::from("File has no extension.")),
+    };
+
     match file_extension {
         "md" => {
             let file_handler = data_ingestion::MarkdownHandler;
