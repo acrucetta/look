@@ -5,7 +5,7 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::path::Path;
 
-use super::file_processing::Document;
+use super::Document;
 
 #[derive(Serialize, Deserialize, Debug, Eq, PartialEq, Hash, Clone)]
 pub struct Term(pub String);

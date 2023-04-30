@@ -1,44 +1,47 @@
-use std::collections::{HashMap, HashSet};
+use std::{
+    collections::{HashMap, HashSet},
+    error::Error,
+};
 
 use crate::{
     data_ingestion::text_processing::process_text,
     indexer::{file_processing::Document, index_storage::Term, Index},
 };
 
-// Structure to store the document information and its relevance score
-#[derive(Debug, Clone, PartialEq, PartialOrd)]
-pub struct SearchResult {
-    pub document: Document,
-    pub score: f64,
+use super::SearchResult;
+
+pub struct Query {
+    pub raw: String,
+    pub tokens: Vec<String>,
+    pub tf_idf: HashMap<String, f64>,
 }
 
-impl SearchResult {
-    // Function to create a new SearchResult
-    pub fn new(document_path: Document, score: f64) -> SearchResult {
-        SearchResult {
-            document: document_path,
-            score,
+fn tokenize_query(query: &str) -> Vec<String> {
+    query
+        .split_whitespace()
+        .map(|token| token.to_owned())
+        .collect()
+}
+
+impl Query {
+    pub fn new(query: &str, index: &Index) -> Self {
+        let tokens = tokenize_query(query);
+        let tf_idf = calculate_query_tfidf(&tokens, index);
+        Query {
+            raw: query.to_owned(),
+            tokens,
+            tf_idf,
         }
     }
 }
 
-impl std::fmt::Display for SearchResult {
-    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        write!(f, "{} - {}", self.document, self.score)
-    }
-}
+// Structure to store the document information and its relevance score
 
-pub fn search(query: &str, index: &Index) -> Vec<SearchResult> {
-    // 1. Process the search query
-    let processed_query = process_text(query);
-
-    // 2. Calculate the query's TF-IDF
-    let query_tfidf = calculate_query_tfidf(&processed_query, index);
-
-    // 3. Retrieve relevant documents
-    let candidate_documents = retrieve_candidate_documents(&processed_query, index);
-
-    rank_documents(&candidate_documents, &query_tfidf, index)
+pub fn search(query: &str, index: &Index) -> Result<Vec<SearchResult>, Box<dyn Error>> {
+    let query = Query::new(query, index);
+    let candidate_documents = retrieve_candidate_documents(&query, index)?;
+    let ranked_documents = rank_documents(&candidate_documents, &query, index)?;
+    Ok(ranked_documents)
 }
 
 /// Function to calculate the query's TF-IDF
@@ -50,7 +53,7 @@ pub fn search(query: &str, index: &Index) -> Vec<SearchResult> {
 /// # Returns
 ///  * A HashMap containing the TF-IDF for each term in the query
 ///
-fn calculate_query_tfidf(query: &str, index: &Index) -> HashMap<String, f64> {
+pub fn calculate_query_tfidf(query: &str, index: &Index) -> HashMap<String, f64> {
     // Calculate the TF-IDF for each term in the query
     let mut query_tfidf = HashMap::new();
     let tokens = query.split_whitespace().collect::<Vec<&str>>();
@@ -73,24 +76,17 @@ fn calculate_query_tfidf(query: &str, index: &Index) -> HashMap<String, f64> {
 ///
 /// # Returns
 ///  * A HashSet containing the paths of the candidate documents
-fn retrieve_candidate_documents(query: &str, index: &Index) -> HashSet<Document> {
-    // Retrieve the candidate documents
+pub fn retrieve_candidate_documents(query: &Query, index: &Index) -> HashSet<Document> {
     let mut candidate_documents = HashSet::new();
-    let tokens = query.split_whitespace().collect::<Vec<&str>>();
-
-    for token in tokens {
+    for token in &query.tokens {
         let term = Term(token.to_owned());
         let docs = index.inverted_index.get(&term);
-        match docs {
-            Some(docs) => {
-                for (doc, _) in docs {
-                    candidate_documents.insert(doc.to_owned());
-                }
+        if let Some(docs) = docs {
+            for (doc, _) in docs {
+                candidate_documents.insert(doc.to_owned());
             }
-            None => {}
         }
     }
-
     candidate_documents
 }
 

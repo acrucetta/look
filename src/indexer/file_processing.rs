@@ -7,24 +7,6 @@ use std::path::Path;
 
 use super::Index;
 
-#[derive(Clone, Serialize, Deserialize, Eq, PartialEq, Debug, Hash, PartialOrd, Ord)]
-pub struct Document {
-    pub path: String,
-    pub contents: String,
-}
-
-impl Document {
-    pub fn new(path: String, contents: String) -> Document {
-        Document { path, contents }
-    }
-}
-
-impl std::fmt::Display for Document {
-    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        write!(f, "{}", self.path)
-    }
-}
-
 pub fn process_directory<P: AsRef<Path>>(
     path: P,
     index: &mut Index,
