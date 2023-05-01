@@ -1,6 +1,10 @@
+use rust_stemmers::{Algorithm, Stemmer};
 use unicode_segmentation::UnicodeSegmentation;
 
 pub fn process_text(text: &str) -> String {
+    // Get the language of the text
+    let language = whatlang::detect(&text).unwrap().lang();
+
     // Step 1: Convert text to lowercase
     let lowercased_text = text.to_lowercase();
 
@@ -11,9 +15,26 @@ pub fn process_text(text: &str) -> String {
     let tokens = tokenize(&cleaned_text);
 
     // Step 4: Stemming
-    // TODO: Removed stemming for now, might add it back later
+    // Stemming is the process of reducing a word to its word stem
+    let stemmed_tokens = stem_tokens(tokens, language);
 
-    tokens.join("")
+    // Step 5: Join the tokens back into a single string
+    stemmed_tokens.join(" ")
+}
+
+fn stem_tokens(tokens: Vec<String>, language: whatlang::Lang) -> Vec<String> {
+    let lang_stemmer = match language {
+        whatlang::Lang::Eng => Stemmer::create(Algorithm::English),
+        whatlang::Lang::Spa => Stemmer::create(Algorithm::Spanish),
+        _ => Stemmer::create(Algorithm::English),
+    };
+
+    let mut stemmed_tokens = Vec::new();
+    for token in tokens {
+        let stemmed_token = lang_stemmer.stem(&token).into_owned();
+        stemmed_tokens.push(stemmed_token);
+    }
+    stemmed_tokens
 }
 
 /// Tokenizes the text into words
