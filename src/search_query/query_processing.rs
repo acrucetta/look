@@ -205,6 +205,9 @@ mod tests {
         let candidate_documents = retrieve_candidate_documents(&query, &index);
 
         let ranked_docs = rank_documents(&candidate_documents, &query.tf_idf, &index);
+
+        // The first document should have a score of 1.0, and the second document s
+        // hould have a score of 0.0. We will just try to be close to these values
         let expected_ranked_docs = vec![
             SearchResult::new(document1.clone(), 1.0),
             SearchResult::new(document2.clone(), 0.0),

@@ -1,3 +1,5 @@
+use unicode_segmentation::UnicodeSegmentation;
+
 pub fn process_text(text: &str) -> String {
     // Step 1: Convert text to lowercase
     let lowercased_text = text.to_lowercase();
@@ -22,10 +24,13 @@ pub fn process_text(text: &str) -> String {
 /// # Returns
 /// * A vector of tokens
 fn tokenize(cleaned_text: &str) -> Vec<String> {
-    cleaned_text
-        .split_whitespace()
-        .map(|s| s.to_owned())
-        .collect()
+    // Split the text into tokens using unicode word boundaries
+    // e.g., "Hello, world!" -> ["Hello", ",", "world", "!"]
+    // We want to keep punctuation so that we can use it for phrase queries
+    let tokens = cleaned_text.split_word_bounds();
+
+    // Return the tokens as a vector
+    tokens.map(|token| token.to_owned()).collect()
 }
 
 /// Removes any characters that are not alphanumeric from the text
