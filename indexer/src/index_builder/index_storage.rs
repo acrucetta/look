@@ -53,6 +53,35 @@ impl Index {
         }
     }
 
+    /// Function to load the index from a JSON file
+    ///
+    /// # Arguments
+    ///  * `index_path` - The path to the JSON file
+    ///  
+    /// # Returns
+    ///  * `std::io::Result<Index>` - The index
+    pub fn load_index_from_json_file(index_path: &Path) -> std::io::Result<Index> {
+        use super::json_serialization::deserialize_hashmap_from_vec;
+
+        let mut file = File::open(index_path)?;
+        let mut contents = String::new();
+        file.read_to_string(&mut contents)?;
+
+        let index: Index = serde_json::from_str(&contents)?;
+
+        let inverted_index = deserialize_hashmap_from_vec(&index.inverted_index);
+        let idf = deserialize_hashmap_from_vec(&index.idf);
+        let document_norms = deserialize_hashmap_from_vec(&index.document_norms);
+
+        Ok(Index {
+            inverted_index,
+            idf,
+            document_norms,
+            num_docs: index.num_docs,
+        })
+    }
+
+    /// Function to save the index to a JSON file
     pub fn save_index_to_json_file(&self, output_path: &Path) -> std::io::Result<()> {
         use super::json_serialization::{serialize_hashmap_to_vec, serialize_inverted_index};
 
@@ -97,7 +126,7 @@ impl Index {
 mod tests {
     use std::collections::HashMap;
 
-    use crate::indexer::index_storage::Term;
+    use crate::index_builder::index_storage::Term;
 
     fn build_index_with_3_docs() -> super::Index {
         use super::Index;

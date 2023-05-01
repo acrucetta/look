@@ -1,4 +1,4 @@
-use crate::indexer::Document;
+use crate::index_builder::Document;
 
 #[derive(Debug, Clone, PartialEq, PartialOrd)]
 pub struct SearchResult {

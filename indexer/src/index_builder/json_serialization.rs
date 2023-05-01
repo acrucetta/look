@@ -26,3 +26,26 @@ pub fn serialize_inverted_index(
         })
         .collect()
 }
+
+pub fn deserialize_hashmap_from_vec<T: Clone, U: Clone>(
+    vec: &Vec<(T, U)>,
+) -> std::collections::HashMap<T, U> {
+    vec.iter()
+        .map(|(k, v)| (k.clone(), v.clone()))
+        .collect::<HashMap<T, U>>()
+}
+
+pub fn deserialize_inverted_index(
+    vec: &Vec<(Term, Vec<(Document, u32)>)>,
+) -> std::collections::HashMap<Term, HashMap<Document, u32>> {
+    vec.iter()
+        .map(|(term, docs)| {
+            (
+                term.clone(),
+                docs.iter()
+                    .map(|(doc, freq)| (doc.clone(), freq.clone()))
+                    .collect(),
+            )
+        })
+        .collect::<HashMap<Term, HashMap<Document, u32>>>()
+}

@@ -1,8 +1,8 @@
-mod data_ingestion;
-mod indexer;
-mod search_query;
-use indexer::file_processing::process_directory;
-use indexer::Index;
+pub mod data_ingestion;
+pub mod index_builder;
+pub mod search_query;
+use index_builder::file_processing::process_directory;
+use index_builder::Index;
 use std::env;
 use std::path::Path;
 
