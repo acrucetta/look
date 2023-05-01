@@ -84,41 +84,13 @@ impl Index {
     }
 
     fn update_document_norm(&mut self, document: &Document) {
-        let document_tfidf_squared_sum = self
-            .inverted_index
-            .iter()
-            .filter_map(|(term, docs)| docs.get(document).map(|tf| (*tf as f64) * self.idf[term]))
-            .map(|tf_idf| tf_idf * tf_idf)
-            .sum::<f64>();
-
-        let document_norm = document_tfidf_squared_sum.sqrt();
+        let mut document_norm = 0.0;
+        for (_, term_frequency) in self.inverted_index.values().flatten() {
+            document_norm += (*term_frequency as f64).powi(2);
+        }
+        document_norm = document_norm.sqrt();
         self.document_norms.insert(document.clone(), document_norm);
     }
-}
-
-pub fn serialize_hashmap_to_vec<T: Clone, U: Clone>(
-    hashmap: &std::collections::HashMap<T, U>,
-) -> Vec<(T, U)> {
-    hashmap
-        .iter()
-        .map(|(k, v)| (k.clone(), v.clone()))
-        .collect()
-}
-
-pub fn serialize_inverted_index(
-    inverted_index: &std::collections::HashMap<Term, HashMap<Document, u32>>,
-) -> Vec<(Term, Vec<(Document, u32)>)> {
-    inverted_index
-        .iter()
-        .map(|(term, docs)| {
-            (
-                term.clone(),
-                docs.iter()
-                    .map(|(doc, freq)| (doc.clone(), freq.clone()))
-                    .collect(),
-            )
-        })
-        .collect()
 }
 
 #[cfg(test)]
@@ -158,7 +130,9 @@ mod tests {
         let mut index = Index::new();
         let text = "This is a test sentence.";
         let path = Path::new("test.txt");
-        let document = super::Document::new(text.to_owned());
+        let document = super::Document::new(path.to_str().unwrap().to_owned());
+
+        index.calculate_idf();
         index.store_processed_text_in_index(&document, &text);
 
         assert_eq!(index.num_docs, 1);

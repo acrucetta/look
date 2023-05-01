@@ -37,10 +37,12 @@ fn main() {
 
     // Print the search results
     println!("Search results:");
-    for search_result in search_results {
-        println!(
-            "{} (Score: {})",
-            search_result.document.path, search_result.score
-        );
+    match search_results {
+        Ok(results) => {
+            for result in results {
+                println!("{}", result);
+            }
+        }
+        Err(e) => println!("Error occurred: {}", e),
     }
 }

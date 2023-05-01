@@ -3,10 +3,7 @@ use std::{
     error::Error,
 };
 
-use crate::{
-    data_ingestion::text_processing::process_text,
-    indexer::{Document, Index, Term},
-};
+use crate::indexer::{Document, Index, Term};
 
 use super::SearchResult;
 
@@ -39,8 +36,8 @@ impl Query {
 
 pub fn search(query: &str, index: &Index) -> Result<Vec<SearchResult>, Box<dyn Error>> {
     let query = Query::new(query, index);
-    let candidate_documents = retrieve_candidate_documents(&query, index)?;
-    let ranked_documents = rank_documents(&candidate_documents, &query, index);
+    let candidate_documents = retrieve_candidate_documents(&query, index);
+    let ranked_documents = rank_documents(&candidate_documents, &query.tf_idf, index);
     Ok(ranked_documents)
 }
 
@@ -145,166 +142,96 @@ fn rank_documents(
 
 #[cfg(test)]
 mod tests {
-    use std::collections::{HashMap, HashSet};
+    use super::*;
 
-    use crate::{
-        indexer::Index,
-        search_query::{
-            query_processing::{rank_documents, retrieve_candidate_documents},
-            SearchResult,
-        },
-    };
-
-    /// Function to create a sample index
-    ///
-    /// # Returns
-    /// * A sample index
-    ///
-    /// The sample index contains the following:
-    /// * Inverted index:
-    ///    * Term: apple
-    ///       * Document: doc1.txt
-    ///         * Term frequency: 2
-    ///      * Document: doc2.txt
-    ///        * Term frequency: 3
-    ///   * Term: banana
-    ///     * Document: doc1.txt
-    ///      * Term frequency: 1
-    ///    * Document: doc3.txt
-    ///     * Term frequency: 1
-    /// * IDF:
-    ///  * Term: apple
-    ///  * IDF: 1.0
-    /// * Term: banana
-    /// * IDF: 1.0
-    /// * Document norms:
-    /// * Document: doc1.txt
-    /// * Norm: 2.236
-    /// * Document: doc2.txt
-    /// * Norm: 3.0
-    /// * Document: doc3.txt
-    /// * Norm: 1.0
-    fn create_sample_index() -> Index {
-        let mut index = Index::new();
-
-        let doc1 = Document::new("doc1.txt".to_owned(), "apple apple banana".to_owned());
-        let doc2 = Document::new(
-            "doc2.txt".to_owned(),
-            "apple apple apple banana banana".to_owned(),
-        );
-        let doc3 = Document::new("doc3.txt".to_owned(), "banana".to_owned());
-
-        index.store_processed_text_in_index(&doc1);
-        index.store_processed_text_in_index(&doc2);
-        index.store_processed_text_in_index(&doc3);
-
-        index.calculate_idf();
-
-        index
+    #[test]
+    fn test_tokenize_query() {
+        let query = "simple query";
+        let tokens = tokenize_query(query);
+        assert_eq!(tokens, vec!["simple", "query"]);
     }
 
     #[test]
-    fn test_calculate_query_idf() {
-        let index = create_sample_index();
-
-        let query = "apple banana";
-        let query_tfidf = super::calculate_query_tfidf(query, &index);
-
-        assert_eq!(query_tfidf.len(), 2);
-    }
-
-    #[test]
-    fn test_getting_document_score() {
-        // Create a sample index
-        let index = create_sample_index();
-
-        // Create a sample query
-        let query = "apple banana";
-
-        // Calculate the query's TF-IDF
-        let query_tfidf = super::calculate_query_tfidf(query, &index);
-
-        // Retrieve the candidate documents
-        let candidate_documents = retrieve_candidate_documents(query, &index);
-
-        // Rank the documents
-        let ranked_documents = rank_documents(&candidate_documents, &query_tfidf, &index);
-
-        // Check the results
-        assert_eq!(ranked_documents.len(), 3);
-        assert_eq!(ranked_documents[0].document.path, "doc1.txt");
-        assert!((ranked_documents[0].score - 1.341).abs() < 1e-3);
+    fn test_calculate_query_tfidf() {
+        let index = Index::new();
+        let query = "this is a query";
+        let query_tfidf = calculate_query_tfidf(query, &index);
+        let expected_tfidf: HashMap<String, f64> = [
+            ("this".to_owned(), 1.0),
+            ("is".to_owned(), 1.0),
+            ("a".to_owned(), 1.0),
+            ("query".to_owned(), 1.0),
+        ]
+        .iter()
+        .cloned()
+        .collect();
+        assert_eq!(query_tfidf, expected_tfidf);
     }
 
     #[test]
     fn test_retrieve_candidate_documents() {
-        let index = create_sample_index();
-        let query = "apple banana";
-        let expected_candidate_documents: HashSet<String> = [
-            "doc1.txt".to_owned(),
-            "doc2.txt".to_owned(),
-            "doc3.txt".to_owned(),
-        ]
-        .iter()
-        .cloned()
-        .collect();
+        let mut index = Index::new();
+        let document1 = Document {
+            path: "doc1.txt".to_owned(),
+        };
+        let document2 = Document {
+            path: "doc2.txt".to_owned(),
+        };
+        index.store_processed_text_in_index(&document1, "this is a sample document");
+        index.store_processed_text_in_index(&document2, "another example document");
+        index.calculate_idf();
 
-        let candidate_documents = retrieve_candidate_documents(query, &index);
-        assert_eq!(
-            candidate_documents.len(),
-            expected_candidate_documents.len()
-        );
+        let query = Query::new("sample", &index);
+        let candidate_documents = retrieve_candidate_documents(&query, &index);
+
+        let expected_candidates: HashSet<Document> = [document1].iter().cloned().collect();
+        assert_eq!(candidate_documents, expected_candidates);
     }
 
     #[test]
     fn test_rank_documents() {
-        let index = create_sample_index();
+        let mut index = Index::new();
+        let document1 = Document {
+            path: "doc1.txt".to_owned(),
+        };
+        let document2 = Document {
+            path: "doc2.txt".to_owned(),
+        };
+        index.store_processed_text_in_index(&document1, "this is a sample document");
+        index.store_processed_text_in_index(&document2, "another example document");
+        index.calculate_idf();
 
-        let candidate_documents: HashSet<Document> = [
-            Document::new("doc1.txt".to_owned(), "apple apple banana".to_owned()),
-            Document::new(
-                "doc2.txt".to_owned(),
-                "apple apple apple banana banana".to_owned(),
-            ),
-            Document::new("doc3.txt".to_owned(), "banana".to_owned()),
-        ]
-        .iter()
-        .cloned()
-        .collect();
+        let query = Query::new("sample document", &index);
+        let candidate_documents = retrieve_candidate_documents(&query, &index);
 
-        let query_tfidf: HashMap<String, f64> =
-            [("apple".to_owned(), 1.0), ("banana".to_owned(), 1.0)]
-                .iter()
-                .cloned()
-                .collect();
-
-        let expected_ranked_documents: Vec<SearchResult> = vec![
-            SearchResult::new(
-                Document::new("doc1.txt".to_owned(), "apple apple banana".to_owned()),
-                1.3416407864998738,
-            ),
-            SearchResult::new(
-                Document::new(
-                    "doc2.txt".to_owned(),
-                    "apple apple apple banana banana".to_owned(),
-                ),
-                0.8944271909999159,
-            ),
-            SearchResult::new(
-                Document::new("doc3.txt".to_owned(), "banana".to_owned()),
-                0.0,
-            ),
+        let ranked_docs = rank_documents(&candidate_documents, &query.tf_idf, &index);
+        let expected_ranked_docs = vec![
+            SearchResult::new(document1.clone(), 1.0),
+            SearchResult::new(document2.clone(), 0.0),
         ];
+        assert_eq!(ranked_docs, expected_ranked_docs);
+    }
 
-        let ranked_documents = rank_documents(&candidate_documents, &query_tfidf, &index);
-        assert_eq!(ranked_documents.len(), expected_ranked_documents.len());
+    #[test]
+    fn test_search() {
+        let mut index = Index::new();
+        let document1 = Document {
+            path: "doc1.txt".to_owned(),
+        };
+        let document2 = Document {
+            path: "doc2.txt".to_owned(),
+        };
+        index.store_processed_text_in_index(&document1, "this is a sample document");
+        index.store_processed_text_in_index(&document2, "another example document");
+        index.calculate_idf();
 
-        for (result, expected_result) in ranked_documents
-            .iter()
-            .zip(expected_ranked_documents.iter())
-        {
-            assert_eq!(result.document, expected_result.document);
-            assert!((result.score - expected_result.score).abs() < 1e-3);
-        }
+        let query = "sample document";
+        let search_results = search(query, &index).unwrap();
+
+        let expected_search_results = vec![
+            SearchResult::new(document1.clone(), 1.0),
+            SearchResult::new(document2.clone(), 0.0),
+        ];
+        assert_eq!(search_results, expected_search_results);
     }
 }
