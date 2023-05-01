@@ -1,42 +1,69 @@
-use clap::{App, Arg};
-use indexer::{search, Index};
+use clap::{arg, command, Command};
+use std::env;
 use std::fs::File;
 use std::io::Read;
 use std::path::Path;
 
 fn main() {
-    let matches = App::new("CLI Search")
-        .version("0.1.0")
-        .author("Your Name <your.email@example.com>")
-        .about("Searches in the indexed documents")
-        .arg(
-            Arg::new("query")
-                .about("The query to search for")
-                .required(true)
-                .index(1),
+    let matches = command!()
+        .subcommand_required(true)
+        .subcommand(
+            Command::new("fd")
+                .about("Find a document with a query")
+                .arg(arg!([QUERY]))
+                .arg_required_else_help(true),
         )
-        .arg(
-            Arg::new("index_path")
-                .short('i')
-                .long("index")
-                .value_name("INDEX_PATH")
-                .about("The path to the index.json file")
-                .takes_value(true)
-                .default_value("index.json"),
+        .subcommand(
+            Command::new("reindex")
+                .about("Re-index a directory")
+                .arg_required_else_help(true),
         )
         .get_matches();
 
-    let query = matches.value_of("query").unwrap();
-    let index_path = matches.value_of("index_path").unwrap();
+    let index_path = env::var("INDEX_PATH").expect("INDEX_PATH not set");
+    let index = load_index_from_json_file(Path::new(&index_path)).expect("Failed to load index");
 
-    let index = load_index_from_json_file(Path::new(index_path)).expect("Failed to load index");
-    let results = search(query, &index).expect("Search failed");
-
-    for result in results {
-        println!("{}", result.document_path);
+    match matches.subcommand() {
+        ("fd", Some(matches)) => {
+            let query = matches.get_one::<String>("QUERY").unwrap();
+            search(query, index);
+        }
+        ("reindex", Some(matches)) => {
+            reindex();
+        }
     }
 }
 
+/// Search for a query in an index
+///
+/// This function will search for a query in an index
+///
+/// # Arguments
+///  * `query` - The query to search for
+///  * `index` - The index to search in
+///
+/// # Returns
+///  * `Vec<String>` - The results of the search
+fn search(query: _, index: _) -> _ {
+    todo!()
+}
+
+/// Re-index a directory
+///
+/// This function will re-index a directory and save the index to the INDEX_PATH
+fn reindex() {
+    todo!()
+}
+
+/// Load an index from a JSON file
+///
+/// This function will load an index from a JSON file
+///
+/// # Arguments
+///  * `index_path` - The path to the JSON file
+///
+/// # Returns
+/// * `std::io::Result<Index>` - The index
 fn load_index_from_json_file(index_path: &Path) -> std::io::Result<Index> {
     let mut file = File::open(index_path)?;
     let mut contents = String::new();
