@@ -1,5 +1,3 @@
-use unicode_segmentation::UnicodeSegmentation;
-
 pub fn process_text(text: &str) -> String {
     // Step 1: Convert text to lowercase
     let lowercased_text = text.to_lowercase();

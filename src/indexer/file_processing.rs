@@ -1,11 +1,10 @@
 use crate::data_ingestion;
 use crate::data_ingestion::text_processing::process_text;
 use data_ingestion::file_handler::*;
-use serde::{Deserialize, Serialize};
 use std::fs;
 use std::path::Path;
 
-use super::Index;
+use super::{Document, Index};
 
 pub fn process_directory<P: AsRef<Path>>(
     path: P,
@@ -48,18 +47,18 @@ pub fn process_file<P: AsRef<Path>>(
         "md" => {
             let file_handler = data_ingestion::MarkdownHandler;
             let content = file_handler.read_contents(path.to_str().unwrap())?;
-            let _processed_text = process_text(&content);
-            let document = Document::new(path.to_str().unwrap().to_owned(), content);
-            index.store_processed_text_in_index(&document);
+            let processed_text = process_text(&content);
+            let document = Document::new(path.to_str().unwrap().to_owned());
+            index.store_processed_text_in_index(&document, &processed_text);
 
             Ok(())
         }
         "txt" => {
             let file_handler = data_ingestion::PlainTextHandler;
             let content = file_handler.read_contents(path.to_str().unwrap())?;
-            let _processed_text = process_text(&content);
-            let document = Document::new(path.to_str().unwrap().to_owned(), content);
-            index.store_processed_text_in_index(&document);
+            let processed_text = process_text(&content);
+            let document = Document::new(path.to_str().unwrap().to_owned());
+            index.store_processed_text_in_index(&document, &processed_text);
 
             Ok(())
         }

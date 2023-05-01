@@ -5,10 +5,7 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::path::Path;
 
-use super::Document;
-
-#[derive(Serialize, Deserialize, Debug, Eq, PartialEq, Hash, Clone)]
-pub struct Term(pub String);
+use super::{Document, Term};
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Index {
@@ -28,31 +25,15 @@ impl Index {
         }
     }
 
-    pub fn store_processed_text_in_index(&mut self, document: &Document) {
-        // Tokenize the processed text
-        let tokens = document.contents.split_whitespace().collect::<Vec<&str>>();
-
-        // Increment the number of documents in the index
+    pub fn store_processed_text_in_index(&mut self, document: &Document, text: &str) {
+        let tokens = text.split_whitespace().collect::<Vec<&str>>();
         self.num_docs += 1;
 
-        // Insert each token into the index and calculate document norms
-        let mut document_tfidf_squared_sum: f64 = 0.0;
         for token in tokens {
-            let term = Term(token.to_owned());
-            let entry = self
-                .inverted_index
-                .entry(term.clone())
-                .or_insert_with(HashMap::new);
-            let term_frequency = entry.entry(document.clone()).or_insert(0);
-            *term_frequency += 1;
-
-            let idf = self.idf.get(&term).unwrap_or(&1.0);
-            let tf_idf = *term_frequency as f64 * idf;
-            document_tfidf_squared_sum += tf_idf * tf_idf;
+            self.insert_token(token, document);
         }
 
-        let document_norm = document_tfidf_squared_sum.sqrt();
-        self.document_norms.insert(document.clone(), document_norm);
+        self.update_document_norm(document);
     }
 
     /// Function to calculate the IDF for each term in the index
@@ -73,38 +54,17 @@ impl Index {
     }
 
     pub fn save_index_to_json_file(&self, output_path: &Path) -> std::io::Result<()> {
-        // We need to convert the HashMaps to Vectors of tuples to be able to serialize them
-        // to JSON
-        let inverted_index = self
-            .inverted_index
-            .iter()
-            .map(|(term, docs)| {
-                (
-                    term.clone(),
-                    docs.iter()
-                        .map(|(doc, freq)| (doc.clone(), freq.clone()))
-                        .collect::<Vec<(Document, u32)>>(),
-                )
-            })
-            .collect::<Vec<(Term, Vec<(Document, u32)>)>>();
+        use super::json_serialization::{serialize_hashmap_to_vec, serialize_inverted_index};
 
-        let idf = self
-            .idf
-            .iter()
-            .map(|(term, idf)| (term.clone(), idf.clone()))
-            .collect::<Vec<(Term, f64)>>();
-
-        let document_norms = self
-            .document_norms
-            .iter()
-            .map(|(doc, norm)| (doc.clone(), norm.clone()))
-            .collect::<Vec<(Document, f64)>>();
+        let inverted_index = serialize_inverted_index(&self.inverted_index);
+        let idf = serialize_hashmap_to_vec(&self.idf);
+        let document_norms = serialize_hashmap_to_vec(&self.document_norms);
 
         let index = serde_json::json!({
-            "inverted_index": inverted_index,
-            "idf": idf,
-            "document_norms": document_norms,
-            "num_docs": self.num_docs,
+                "inverted_index": inverted_index,
+                "idf": idf,
+                "document_norms": document_norms,
+                "num_docs": self.num_docs,
         });
 
         let mut file = File::create(output_path)?;
@@ -112,6 +72,53 @@ impl Index {
 
         Ok(())
     }
+
+    fn insert_token(&mut self, token: &str, document: &Document) {
+        let term = Term(token.to_owned());
+        let entry = self
+            .inverted_index
+            .entry(term.clone())
+            .or_insert_with(HashMap::new);
+        let term_frequency = entry.entry(document.clone()).or_insert(0);
+        *term_frequency += 1;
+    }
+
+    fn update_document_norm(&mut self, document: &Document) {
+        let document_tfidf_squared_sum = self
+            .inverted_index
+            .iter()
+            .filter_map(|(term, docs)| docs.get(document).map(|tf| (*tf as f64) * self.idf[term]))
+            .map(|tf_idf| tf_idf * tf_idf)
+            .sum::<f64>();
+
+        let document_norm = document_tfidf_squared_sum.sqrt();
+        self.document_norms.insert(document.clone(), document_norm);
+    }
+}
+
+pub fn serialize_hashmap_to_vec<T: Clone, U: Clone>(
+    hashmap: &std::collections::HashMap<T, U>,
+) -> Vec<(T, U)> {
+    hashmap
+        .iter()
+        .map(|(k, v)| (k.clone(), v.clone()))
+        .collect()
+}
+
+pub fn serialize_inverted_index(
+    inverted_index: &std::collections::HashMap<Term, HashMap<Document, u32>>,
+) -> Vec<(Term, Vec<(Document, u32)>)> {
+    inverted_index
+        .iter()
+        .map(|(term, docs)| {
+            (
+                term.clone(),
+                docs.iter()
+                    .map(|(doc, freq)| (doc.clone(), freq.clone()))
+                    .collect(),
+            )
+        })
+        .collect()
 }
 
 #[cfg(test)]
@@ -127,18 +134,18 @@ mod tests {
         let mut index = Index::new();
         let text = "This is a test sentence.";
         let path = Path::new("test.txt");
-        let document = super::Document::new(path.to_str().unwrap().to_owned(), text.to_owned());
-        index.store_processed_text_in_index(&document);
+        let document = super::Document::new(path.to_str().unwrap().to_owned());
+        index.store_processed_text_in_index(&document, &text);
 
         let text = "This is another test sentence.";
         let path = Path::new("test2.txt");
-        let document = super::Document::new(path.to_str().unwrap().to_owned(), text.to_owned());
-        index.store_processed_text_in_index(&document);
+        let document = super::Document::new(path.to_str().unwrap().to_owned());
+        index.store_processed_text_in_index(&document, &text);
 
         let text = "This is a third test sentence.";
         let path = Path::new("test3.txt");
-        let document = super::Document::new(path.to_str().unwrap().to_owned(), text.to_owned());
-        index.store_processed_text_in_index(&document);
+        let document = super::Document::new(path.to_str().unwrap().to_owned());
+        index.store_processed_text_in_index(&document, &text);
 
         index
     }
@@ -151,8 +158,8 @@ mod tests {
         let mut index = Index::new();
         let text = "This is a test sentence.";
         let path = Path::new("test.txt");
-        let document = super::Document::new(text.to_owned(), path.to_str().unwrap().to_owned());
-        index.store_processed_text_in_index(&document);
+        let document = super::Document::new(text.to_owned());
+        index.store_processed_text_in_index(&document, &text);
 
         assert_eq!(index.num_docs, 1);
         assert_eq!(index.inverted_index.len(), 5);
