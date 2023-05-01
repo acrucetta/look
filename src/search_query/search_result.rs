@@ -1,3 +1,5 @@
+use crate::indexer::Document;
+
 #[derive(Debug, Clone, PartialEq, PartialOrd)]
 pub struct SearchResult {
     pub document: Document,
@@ -16,6 +18,6 @@ impl SearchResult {
 
 impl std::fmt::Display for SearchResult {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        write!(f, "{} - {}", self.document, self.score)
+        write!(f, "{} ({})", self.document.path, self.score)
     }
 }

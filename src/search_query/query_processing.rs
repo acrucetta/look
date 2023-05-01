@@ -5,7 +5,7 @@ use std::{
 
 use crate::{
     data_ingestion::text_processing::process_text,
-    indexer::{file_processing::Document, index_storage::Term, Index},
+    indexer::{Document, Index, Term},
 };
 
 use super::SearchResult;
@@ -26,7 +26,7 @@ fn tokenize_query(query: &str) -> Vec<String> {
 impl Query {
     pub fn new(query: &str, index: &Index) -> Self {
         let tokens = tokenize_query(query);
-        let tf_idf = calculate_query_tfidf(&tokens, index);
+        let tf_idf = calculate_query_tfidf(query, index);
         Query {
             raw: query.to_owned(),
             tokens,
@@ -40,7 +40,7 @@ impl Query {
 pub fn search(query: &str, index: &Index) -> Result<Vec<SearchResult>, Box<dyn Error>> {
     let query = Query::new(query, index);
     let candidate_documents = retrieve_candidate_documents(&query, index)?;
-    let ranked_documents = rank_documents(&candidate_documents, &query, index)?;
+    let ranked_documents = rank_documents(&candidate_documents, &query, index);
     Ok(ranked_documents)
 }
 
@@ -148,7 +148,7 @@ mod tests {
     use std::collections::{HashMap, HashSet};
 
     use crate::{
-        indexer::{file_processing::Document, Index},
+        indexer::Index,
         search_query::{
             query_processing::{rank_documents, retrieve_candidate_documents},
             SearchResult,

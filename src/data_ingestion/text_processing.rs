@@ -22,8 +22,9 @@ pub fn process_text(text: &str) -> String {
 /// # Returns
 /// * A vector of tokens
 fn tokenize(cleaned_text: &str) -> Vec<String> {
-    UnicodeSegmentation::split_word_bounds(cleaned_text)
-        .map(|s| s.to_string())
+    cleaned_text
+        .split_whitespace()
+        .map(|s| s.to_owned())
         .collect()
 }
 

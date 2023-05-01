@@ -37,7 +37,10 @@ fn main() {
 
     // Print the search results
     println!("Search results:");
-    for result in search_results {
-        println!("{} - {}", result.document, result.score);
+    for search_result in search_results {
+        println!(
+            "{} (Score: {})",
+            search_result.document.path, search_result.score
+        );
     }
 }
