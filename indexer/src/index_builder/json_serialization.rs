@@ -20,9 +20,23 @@ pub fn serialize_inverted_index(
             (
                 term.clone(),
                 docs.iter()
-                    .map(|(doc, freq)| (doc.clone(), freq.clone()))
+                    .map(|(doc, freq)| (doc.clone(), *freq))
                     .collect(),
             )
         })
+        .collect()
+}
+
+pub fn deserialize_vec_to_hashmap<T: Clone + Eq + std::hash::Hash, U: Clone>(
+    vec: &[(T, U)],
+) -> HashMap<T, U> {
+    vec.iter().cloned().collect()
+}
+
+pub fn deserialize_inverted_index(
+    vec: &[(Term, Vec<(Document, u32)>)],
+) -> HashMap<Term, HashMap<Document, u32>> {
+    vec.iter()
+        .map(|(term, docs)| (term.clone(), deserialize_vec_to_hashmap(docs)))
         .collect()
 }

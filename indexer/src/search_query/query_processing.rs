@@ -3,7 +3,7 @@ use std::{
     error::Error,
 };
 
-use crate::indexer::{Document, Index, Term};
+use crate::index_builder::{Document, Index, Term};
 
 use super::SearchResult;
 

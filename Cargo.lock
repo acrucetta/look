@@ -21,6 +21,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "ahash"
+version = "0.7.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fcb51a0695d8f838b1ee009b3fbf66bda078cd64590202a864a8f3e8c4315c47"
+dependencies = [
+ "getrandom",
+ "once_cell",
+ "version_check",
+]
+
+[[package]]
 name = "aho-corasick"
 version = "0.7.20"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -232,6 +243,7 @@ dependencies = [
  "anstyle",
  "bitflags",
  "clap_lex",
+ "once_cell",
  "strsim",
 ]
 
@@ -252,6 +264,15 @@ name = "clap_lex"
 version = "0.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8a2dd5a6fe8c6e3502f568a6353e5273bbb15193ad9a89e457b9970798efbea1"
+
+[[package]]
+name = "cli"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "dotenv",
+ "indexer",
+]
 
 [[package]]
 name = "colorchoice"
@@ -461,6 +482,12 @@ dependencies = [
  "redox_users",
  "winapi",
 ]
+
+[[package]]
+name = "dotenv"
+version = "0.15.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "77c90badedccf4105eca100756a0b1289e191f6fcbdadd3cee1d2f614f97da8f"
 
 [[package]]
 name = "either"
@@ -683,6 +710,9 @@ name = "hashbrown"
 version = "0.12.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8a9ee70c43aaf417c914396645a0fa852624801b24ebb7ae78fe8272889ac888"
+dependencies = [
+ "ahash",
+]
 
 [[package]]
 name = "heck"
@@ -799,6 +829,18 @@ checksum = "e14ddfc70884202db2244c223200c204c2bda1bc6e0998d11b5e024d657209e6"
 dependencies = [
  "unicode-bidi",
  "unicode-normalization",
+]
+
+[[package]]
+name = "indexer"
+version = "0.1.0"
+dependencies = [
+ "rust-stemmers",
+ "serde",
+ "serde_json",
+ "tokenizers",
+ "unicode-segmentation",
+ "whatlang",
 ]
 
 [[package]]
@@ -940,17 +982,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "abb12e687cfb44aa40f41fc3978ef76448f9b6038cad6aef4259d3c095a2382e"
 dependencies = [
  "cfg-if",
-]
-
-[[package]]
-name = "looker"
-version = "0.1.0"
-dependencies = [
- "rust-stemmers",
- "serde",
- "serde_json",
- "tokenizers",
- "unicode-segmentation",
 ]
 
 [[package]]
@@ -1955,6 +1986,16 @@ checksum = "e33b99f4b23ba3eec1a53ac264e35a755f00e966e0065077d6027c0f575b0b97"
 dependencies = [
  "js-sys",
  "wasm-bindgen",
+]
+
+[[package]]
+name = "whatlang"
+version = "0.16.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9c531a2dc4c462b833788be2c07eef4e621d0e9edbd55bf280cc164c1c1aa043"
+dependencies = [
+ "hashbrown",
+ "once_cell",
 ]
 
 [[package]]
