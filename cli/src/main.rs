@@ -15,19 +15,14 @@ fn main() {
                 .arg(arg!([QUERY]))
                 .arg_required_else_help(true),
         )
-        .subcommand(
-            Command::new("reindex")
-                .about("Re-index a directory")
-                .arg_required_else_help(true),
-        )
+        .subcommand(Command::new("reindex").about("Re-index a directory"))
         .get_matches();
-
-    let index_path = "index.json";
-    let index =
-        Index::load_index_from_json_file(Path::new(&index_path)).expect("Failed to load index");
 
     match matches.subcommand() {
         Some(("fd", matches)) => {
+            let index_path = "index.json";
+            let index = Index::load_index_from_json_file(Path::new(&index_path))
+                .expect("Failed to load index");
             let query = matches.get_one::<String>("QUERY").unwrap();
             search(query, index);
         }
@@ -49,7 +44,7 @@ fn main() {
 /// # Returns
 ///  * `Vec<String>` - The results of the search
 fn search(query: &String, index: Index) -> Result<Vec<SearchResult>, Box<dyn std::error::Error>> {
-    let search_results = search_query::search(query, &index);
+    let search_results = search_query::search(&query, &index);
     // Print the search results
     println!("Search results:");
     match search_results {
@@ -67,6 +62,8 @@ fn search(query: &String, index: Index) -> Result<Vec<SearchResult>, Box<dyn std
 ///
 /// This function will re-index a directory and save the index to the INDEX_PATH
 fn reindex() {
+    print!("The current working directory is: ");
+    println!("{}", env::current_dir().unwrap().display());
     let dir_path = "personal_data";
     let mut index = Index::new();
 
@@ -99,22 +96,22 @@ mod tests {
         let text = "This is a test sentence.";
         let path = Path::new("test.txt");
         let document = Document::new(path.to_str().unwrap().to_owned());
-        index.store_processed_text_in_index(&document, text);
+        index.store_processed_text_in_index(&document, &text);
 
         let text = "This is another test sentence.";
         let path = Path::new("test2.txt");
         let document = Document::new(path.to_str().unwrap().to_owned());
-        index.store_processed_text_in_index(&document, text);
+        index.store_processed_text_in_index(&document, &text);
 
         let text = "This is a third test sentence.";
         let path = Path::new("test3.txt");
         let document = Document::new(path.to_str().unwrap().to_owned());
-        index.store_processed_text_in_index(&document, text);
+        index.store_processed_text_in_index(&document, &text);
 
         // Save the index to a JSON file
         index.calculate_idf();
         index
-            .save_index_to_json_file(Path::new("test_index.json"))
+            .save_index_to_json_file(&Path::new("test_index.json"))
             .unwrap();
         index
     }
@@ -137,7 +134,7 @@ mod tests {
         let mut index_path = root_dir.clone();
         index_path.push("index.json");
 
-        let mut personal_data_path = root_dir;
+        let mut personal_data_path = root_dir.clone();
         personal_data_path.push("personal_data");
 
         // Delete the index file if it exists
