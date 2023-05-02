@@ -3,7 +3,7 @@ use unicode_segmentation::UnicodeSegmentation;
 
 pub fn process_text(text: &str) -> String {
     // Get the language of the text
-    let language = whatlang::detect(&text).unwrap().lang();
+    let language = whatlang::detect(text).unwrap().lang();
 
     // Step 1: Convert text to lowercase
     let lowercased_text = text.to_lowercase();

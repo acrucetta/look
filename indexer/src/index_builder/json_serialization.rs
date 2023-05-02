@@ -20,7 +20,7 @@ pub fn serialize_inverted_index(
             (
                 term.clone(),
                 docs.iter()
-                    .map(|(doc, freq)| (doc.clone(), freq.clone()))
+                    .map(|(doc, freq)| (doc.clone(), *freq))
                     .collect(),
             )
         })

@@ -132,7 +132,7 @@ impl Index {
         let term = Term(token.to_owned());
         let entry = self
             .inverted_index
-            .entry(term.clone())
+            .entry(term)
             .or_insert_with(HashMap::new);
         let term_frequency = entry.entry(document.clone()).or_insert(0);
         *term_frequency += 1;
@@ -153,7 +153,7 @@ mod tests {
     use std::{collections::HashMap, path::Path};
 
     use crate::{
-        index_builder::{index_storage::Term, Document},
+        index_builder::{index_storage::Term},
         Index,
     };
 
@@ -165,22 +165,22 @@ mod tests {
         let text = "This is a test sentence.";
         let path = Path::new("test.txt");
         let document = super::Document::new(path.to_str().unwrap().to_owned());
-        index.store_processed_text_in_index(&document, &text);
+        index.store_processed_text_in_index(&document, text);
 
         let text = "This is another test sentence.";
         let path = Path::new("test2.txt");
         let document = super::Document::new(path.to_str().unwrap().to_owned());
-        index.store_processed_text_in_index(&document, &text);
+        index.store_processed_text_in_index(&document, text);
 
         let text = "This is a third test sentence.";
         let path = Path::new("test3.txt");
         let document = super::Document::new(path.to_str().unwrap().to_owned());
-        index.store_processed_text_in_index(&document, &text);
+        index.store_processed_text_in_index(&document, text);
 
         // Save the index to a JSON file
         index.calculate_idf();
         index
-            .save_index_to_json_file(&Path::new("test_index.json"))
+            .save_index_to_json_file(Path::new("test_index.json"))
             .unwrap();
         index
     }
@@ -196,7 +196,7 @@ mod tests {
         let document = super::Document::new(path.to_str().unwrap().to_owned());
 
         index.calculate_idf();
-        index.store_processed_text_in_index(&document, &text);
+        index.store_processed_text_in_index(&document, text);
 
         assert_eq!(index.num_docs, 1);
         assert_eq!(index.inverted_index.len(), 5);
@@ -257,7 +257,7 @@ mod tests {
         let index_path = Path::new("test_index.json");
 
         // Load the index from the test index JSON file
-        let index = Index::load_index_from_json_file(&index_path).unwrap();
+        let index = Index::load_index_from_json_file(index_path).unwrap();
 
         // Check if the loaded index has the same contents as the original index
         assert_eq!(expected_index.inverted_index, index.inverted_index);
@@ -270,7 +270,7 @@ mod tests {
     fn test_load_index_from_non_existent_file() {
         // Try to load an index from a non-existent file
         let index_path = Path::new("non_existent_file.json");
-        let result = Index::load_index_from_json_file(&index_path);
+        let result = Index::load_index_from_json_file(index_path);
 
         // The function should return an error
         assert!(result.is_err());
