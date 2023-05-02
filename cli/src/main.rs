@@ -1,4 +1,7 @@
 use clap::{arg, command, Command};
+use indexer::index_builder::Index;
+use indexer::search_query;
+use indexer::search_query::SearchResult;
 use std::env;
 use std::fs::File;
 use std::io::Read;
@@ -24,11 +27,11 @@ fn main() {
     let index = load_index_from_json_file(Path::new(&index_path)).expect("Failed to load index");
 
     match matches.subcommand() {
-        ("fd", Some(matches)) => {
+        Some(("fd", matches)) => {
             let query = matches.get_one::<String>("QUERY").unwrap();
             search(query, index);
         }
-        ("reindex", Some(matches)) => {
+        Some(("reindex", matches)) => {
             reindex();
         }
     }
@@ -44,8 +47,19 @@ fn main() {
 ///
 /// # Returns
 ///  * `Vec<String>` - The results of the search
-fn search(query: _, index: _) -> _ {
-    todo!()
+fn search(query: &String, index: Index) -> Result<Vec<SearchResult>, Box<dyn std::error::Error>> {
+    let search_results = search_query::search(&query, &index);
+    // Print the search results
+    println!("Search results:");
+    match search_results {
+        Ok(results) => {
+            for result in results {
+                println!("{}", result);
+            }
+        }
+        Err(e) => println!("Error occurred: {}", e),
+    }
+    search_results
 }
 
 /// Re-index a directory

@@ -5,4 +5,4 @@ edition = "2021"
 
 [dependencies]
 indexer = { path = "../indexer" }
-clap = "4.2.5"
+clap = {verison="4.1.11", features = ["cargo"]}
