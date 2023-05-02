@@ -7,3 +7,4 @@ edition = "2021"
 indexer = { path = "../indexer" }
 clap = {verison="4.1.11", features = ["cargo"]}
 dotenv = "0.15.0"
+config = "0.10.1"
