@@ -58,12 +58,8 @@ fn search(query: &String, index: Index) -> Result<(), Box<dyn std::error::Error>
     match search_results {
         Ok(results) => {
             // Only print the top 10 results
-            for result in results.iter().take(10) {
-                println!(
-                    "Doc: `{}` (Match Score: {:.2})",
-                    result.document, result.score
-                );
-            }
+            let cli_output = formatter::format_cli_output(results);
+            println!("{}", cli_output);
             Ok(())
         }
         Err(e) => Err(e),
