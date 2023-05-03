@@ -11,5 +11,14 @@ impl Document {
     }
 }
 
+impl std::fmt::Display for Document {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        // Only display the filename, not the full path
+        let path = std::path::Path::new(&self.path);
+        let filename = path.file_name().unwrap().to_str().unwrap();
+        write!(f, "{}", filename)
+    }
+}
+
 #[derive(Serialize, Deserialize, Debug, Eq, PartialEq, Hash, Clone)]
 pub struct Term(pub String);

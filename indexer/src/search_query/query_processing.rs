@@ -33,11 +33,12 @@ impl Query {
 }
 
 // Structure to store the document information and its relevance score
-
 pub fn search(query: &str, index: &Index) -> Result<Vec<SearchResult>, Box<dyn Error>> {
     let query = Query::new(query, index);
     let candidate_documents = retrieve_candidate_documents(&query, index);
-    let ranked_documents = rank_documents(&candidate_documents, &query.tf_idf, index);
+    let mut ranked_documents = rank_documents(&candidate_documents, &query.tf_idf, index);
+    // Sort the documents by score in descending order
+    ranked_documents.sort_by(|a, b| b.score.partial_cmp(&a.score).unwrap());
     Ok(ranked_documents)
 }
 
@@ -236,5 +237,33 @@ mod tests {
             SearchResult::new(document2.clone(), 0.0),
         ];
         assert_eq!(search_results, expected_search_results);
+    }
+
+    #[test]
+    fn test_sort_vectors() {
+        let mut results = vec![
+            SearchResult {
+                document: Document {
+                    path: "path1.txt".to_owned(),
+                },
+                score: 0.5,
+            },
+            SearchResult {
+                document: Document {
+                    path: "path2.txt".to_owned(),
+                },
+                score: 0.2,
+            },
+            SearchResult {
+                document: Document {
+                    path: "path3".to_owned(),
+                },
+                score: 0.8,
+            },
+        ];
+        results.sort_by(|a, b| b.score.partial_cmp(&a.score).unwrap());
+        println!("Sorted results: {:?}", results);
+
+        assert!(results[0].score > results[1].score);
     }
 }

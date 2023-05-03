@@ -16,7 +16,10 @@ pub fn process_directory<P: AsRef<Path>>(
             let entry = entry?;
             let path = entry.path();
             if path.is_file() {
-                process_file(&path, index)?;
+                // We will skip files that return an error when we try to process them.
+                if let Err(e) = process_file(&path, index) {
+                    println!("Error processing file: {}", e);
+                }
             } else if path.is_dir() {
                 process_directory(&path, index)?;
             }
