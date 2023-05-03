@@ -67,7 +67,6 @@ fn search(query: &String, index: Index) -> Result<Vec<SearchResult>, Box<dyn std
 /// This function will re-index a directory and save the index to the INDEX_PATH
 fn reindex(config: Config) {
     println!("Indexing all the files in {}...", config.personal_data);
-    println!("{}", env::current_dir().unwrap().display());
     let mut index = Index::new();
 
     // Update your `process_file` function to accept a `&mut HashMap<String, Vec<String>>` argument and pass it to `store_processed_text_in_index`

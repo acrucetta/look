@@ -3,7 +3,7 @@ use unicode_segmentation::UnicodeSegmentation;
 
 pub fn process_text(text: &str) -> String {
     // Get the language of the text
-    let language = whatlang::detect(text).unwrap().lang();
+    // let language = whatlang::detect(text).unwrap().lang();
 
     // Step 1: Convert text to lowercase
     let lowercased_text = text.to_lowercase();
@@ -16,10 +16,10 @@ pub fn process_text(text: &str) -> String {
 
     // Step 4: Stemming
     // Stemming is the process of reducing a word to its word stem
-    let stemmed_tokens = stem_tokens(tokens, language);
+    // let stemmed_tokens = stem_tokens(tokens, language);
 
     // Step 5: Join the tokens back into a single string
-    stemmed_tokens.join(" ")
+    tokens.join(" ")
 }
 
 fn stem_tokens(tokens: Vec<String>, language: whatlang::Lang) -> Vec<String> {
