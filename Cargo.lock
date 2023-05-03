@@ -1006,7 +1006,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "looker"
+name = "look"
 version = "0.1.0"
 dependencies = [
  "ansi_term",
