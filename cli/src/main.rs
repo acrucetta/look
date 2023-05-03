@@ -7,6 +7,7 @@ use indexer::search_query::SearchResult;
 use std::env;
 use std::path::Path;
 mod config;
+mod formatter;
 
 fn main() {
     // Load the config file
@@ -28,7 +29,10 @@ fn main() {
             let index = Index::load_index_from_json_file(Path::new(&config.index_path))
                 .expect("Failed to load index");
             let query = matches.get_one::<String>("QUERY").unwrap();
-            search(query, index);
+            match search(&query, index) {
+                Ok(_) => {}
+                Err(e) => println!("Error occurred: {}", e),
+            }
         }
         Some(("reindex", _matches)) => {
             reindex(config);
@@ -47,7 +51,7 @@ fn main() {
 ///
 /// # Returns
 ///  * `Vec<String>` - The results of the search
-fn search(query: &String, index: Index) -> Result<Vec<SearchResult>, Box<dyn std::error::Error>> {
+fn search(query: &String, index: Index) -> Result<(), Box<dyn std::error::Error>> {
     let search_results = search_query::search(query, &index);
     // Print the search results
     println!("Search results:");
@@ -60,14 +64,12 @@ fn search(query: &String, index: Index) -> Result<Vec<SearchResult>, Box<dyn std
                     result.document, result.score
                 );
             }
-            Ok(results)
+            Ok(())
         }
         Err(e) => Err(e),
     }
 }
 
-/// Re-index a directory
-///
 /// This function will re-index a directory and save the index to the INDEX_PATH
 fn reindex(config: Config) {
     println!("Indexing all the files in {}...", config.personal_data);
