@@ -1,5 +1,4 @@
 use rust_stemmers::{Algorithm, Stemmer};
-use stop_words::Spark;
 use unicode_segmentation::UnicodeSegmentation;
 
 pub fn process_text(text: &str) -> String {

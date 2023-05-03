@@ -4,6 +4,8 @@ use crate::index_builder::Document;
 pub struct SearchResult {
     pub document: Document,
     pub score: f64,
+    pub query_tokens: Vec<String>,
+    pub matched_lines: Vec<String>,
 }
 
 impl SearchResult {
@@ -12,6 +14,8 @@ impl SearchResult {
         SearchResult {
             document: document_path,
             score,
+            query_tokens: Vec::new(),
+            matched_lines: Vec::new(),
         }
     }
 }

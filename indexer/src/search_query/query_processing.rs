@@ -39,6 +39,11 @@ pub fn search(query: &str, index: &Index) -> Result<Vec<SearchResult>, Box<dyn E
     let mut ranked_documents = rank_documents(&candidate_documents, &query.tf_idf, index);
     // Sort the documents by score in descending order
     ranked_documents.sort_by(|a, b| b.score.partial_cmp(&a.score).unwrap());
+
+    // Add the query tokens to the ranked documents structure
+    ranked_documents.iter_mut().for_each(|doc| {
+        doc.query_tokens = query.tokens.clone();
+    });
     Ok(ranked_documents)
 }
 
@@ -247,18 +252,24 @@ mod tests {
                     path: "path1.txt".to_owned(),
                 },
                 score: 0.5,
+                query_tokens: todo!(),
+                matched_lines: todo!(),
             },
             SearchResult {
                 document: Document {
                     path: "path2.txt".to_owned(),
                 },
                 score: 0.2,
+                query_tokens: todo!(),
+                matched_lines: todo!(),
             },
             SearchResult {
                 document: Document {
                     path: "path3".to_owned(),
                 },
                 score: 0.8,
+                query_tokens: todo!(),
+                matched_lines: todo!(),
             },
         ];
         results.sort_by(|a, b| b.score.partial_cmp(&a.score).unwrap());
