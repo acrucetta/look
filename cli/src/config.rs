@@ -1,4 +1,4 @@
-use serde::Deserialize;
+
 use std::{io::Write, path::Path};
 
 pub struct Config {

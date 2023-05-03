@@ -48,7 +48,7 @@ fn main() {
 /// # Returns
 ///  * `Vec<String>` - The results of the search
 fn search(query: &String, index: Index) -> Result<Vec<SearchResult>, Box<dyn std::error::Error>> {
-    let search_results = search_query::search(&query, &index);
+    let search_results = search_query::search(query, &index);
     // Print the search results
     println!("Search results:");
     match search_results {
@@ -91,7 +91,7 @@ fn reindex(config: Config) {
 
 #[cfg(test)]
 mod tests {
-    use std::{env, path::Path};
+    use std::{path::Path};
 
     use crate::config;
 
@@ -105,17 +105,17 @@ mod tests {
         let text = "This is a test sentence.";
         let path = Path::new("test.txt");
         let document = Document::new(path.to_str().unwrap().to_owned());
-        index.store_processed_text_in_index(&document, &text);
+        index.store_processed_text_in_index(&document, text);
 
         let text = "This is another test sentence.";
         let path = Path::new("test2.txt");
         let document = Document::new(path.to_str().unwrap().to_owned());
-        index.store_processed_text_in_index(&document, &text);
+        index.store_processed_text_in_index(&document, text);
 
         let text = "This is a third test sentence.";
         let path = Path::new("test3.txt");
         let document = Document::new(path.to_str().unwrap().to_owned());
-        index.store_processed_text_in_index(&document, &text);
+        index.store_processed_text_in_index(&document, text);
 
         // Save the index to a JSON file
         index.calculate_idf();
