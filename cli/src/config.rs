@@ -1,74 +1,73 @@
 use serde::Deserialize;
-use std::path::Path;
+use std::{io::Write, path::Path};
 
-#[derive(Debug, Deserialize)]
-pub struct AppConfig {
+pub struct Config {
     pub index_path: String,
-    pub data_path: String,
+    pub personal_data: String,
+    pub app_config_path: String,
 }
 
-impl AppConfig {
-    pub fn new(config_dir: Option<&Path>) -> Self {
-        let mut settings = config::Config::default();
-        settings.set_default("index_path", ".").unwrap();
-        settings.set_default("data_path", ".").unwrap();
+pub fn load_config() -> Config {
+    // We're going to use the directories crate to find the config dir
+    let config_path = directories::BaseDirs::new()
+        .unwrap()
+        .config_dir()
+        .to_str()
+        .unwrap()
+        .to_owned()
+        + "/looker-cli";
 
-        let config_dir = config_dir
-            .map(Path::to_path_buf)
-            .unwrap_or_else(|| dirs_next::config_dir().unwrap().join("looker"));
+    // If we don't have an app folder, create one
+    if !Path::new(&config_path).exists() {
+        std::fs::create_dir(&config_path).unwrap();
+    }
 
-        if !config_dir.exists() {
-            std::fs::create_dir_all(&config_dir).unwrap();
-        }
+    // Load the config file with Config::builder
+    let settings_path = config_path.clone() + "/.env";
+    let index_path = config_path.clone() + "/index.json";
+    let personal_data = config_path.clone() + "/personal_data";
 
-        let config_file = config_dir.join("settings.toml");
-        if config_file.exists() {
-            settings.merge(config::File::from(config_file)).unwrap();
-        }
+    // Create a new config file if it doesn't exist
+    if !Path::new(&settings_path).exists() {
+        let mut settings_file = std::fs::File::create(&settings_path).unwrap();
+        // Write the default settings to the file
+        settings_file
+            .write_all(
+                format!(
+                    "INDEX_PATH='{}'\nPERSONAL_DATA='{}'",
+                    index_path, personal_data
+                )
+                .as_bytes(),
+            )
+            .unwrap();
+    }
+    // Load the config file
+    dotenv::from_path(&settings_path).unwrap();
 
-        settings.merge(config::Environment::new()).unwrap();
-        settings.try_into().unwrap()
+    Config {
+        index_path: std::env::var("INDEX_PATH").unwrap(),
+        personal_data: std::env::var("PERSONAL_DATA").unwrap(),
+        app_config_path: config_path,
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::fs::{self, File};
-    use std::io::Write;
-    use tempfile::tempdir;
 
     #[test]
-    fn test_app_config_defaults() {
-        let config = AppConfig::new(None);
-        assert_eq!(config.index_path, ".");
-        assert_eq!(config.data_path, ".");
-    }
+    fn test_load_config() {
+        load_config();
+        let index_path = std::env::var("INDEX_PATH").unwrap();
+        let personal_data = std::env::var("PERSONAL_DATA").unwrap();
 
-    #[test]
-    fn test_app_config_from_file() {
-        let temp_dir = tempdir().unwrap();
-        let config_file = temp_dir.path().join("settings.toml");
-        let mut file = File::create(&config_file).unwrap();
-
-        writeln!(
-            file,
-            "index_path = 'custom_index'\ndata_path = 'custom_data'"
-        )
-        .unwrap();
-
-        let config = AppConfig::new(Some(temp_dir.path()));
-        assert_eq!(config.index_path, "custom_index");
-        assert_eq!(config.data_path, "custom_data");
-    }
-
-    #[test]
-    fn test_app_config_directory_creation() {
-        let temp_dir = tempdir().unwrap();
-        let config_dir = temp_dir.path().join("looker");
-
-        AppConfig::new(Some(temp_dir.path()));
-
-        assert!(config_dir.exists());
+        assert_eq!(
+            index_path,
+            "Users/andrescrucettanieto/Library/Application Support/looker-cli/index.json"
+        );
+        assert_eq!(
+            personal_data,
+            "Users/andrescrucettanieto/Library/Application Support/looker-cli/personal_data"
+        );
     }
 }

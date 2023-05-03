@@ -1,12 +1,17 @@
 use clap::{arg, command, Command};
+use config::Config;
 use indexer::index_builder::file_processing::process_directory;
 use indexer::index_builder::Index;
 use indexer::search_query;
 use indexer::search_query::SearchResult;
 use std::env;
 use std::path::Path;
+mod config;
 
 fn main() {
+    // Load the config file
+    let config = config::load_config();
+
     let matches = command!()
         .subcommand_required(true)
         .subcommand(
@@ -20,14 +25,13 @@ fn main() {
 
     match matches.subcommand() {
         Some(("fd", matches)) => {
-            let index_path = "index.json";
-            let index = Index::load_index_from_json_file(Path::new(&index_path))
+            let index = Index::load_index_from_json_file(Path::new(&config.index_path))
                 .expect("Failed to load index");
             let query = matches.get_one::<String>("QUERY").unwrap();
             search(query, index);
         }
         Some(("reindex", _matches)) => {
-            reindex();
+            reindex(config);
         }
         _ => unreachable!(),
     }
@@ -61,14 +65,13 @@ fn search(query: &String, index: Index) -> Result<Vec<SearchResult>, Box<dyn std
 /// Re-index a directory
 ///
 /// This function will re-index a directory and save the index to the INDEX_PATH
-fn reindex() {
-    print!("The current working directory is: ");
+fn reindex(config: Config) {
+    println!("Indexing all the files in {}...", config.personal_data);
     println!("{}", env::current_dir().unwrap().display());
-    let dir_path = "personal_data";
     let mut index = Index::new();
 
     // Update your `process_file` function to accept a `&mut HashMap<String, Vec<String>>` argument and pass it to `store_processed_text_in_index`
-    match process_directory(dir_path, &mut index) {
+    match process_directory(config.personal_data, &mut index) {
         Ok(_) => println!("Processing completed."),
         Err(e) => println!("Error occurred: {}", e),
     }
@@ -77,9 +80,8 @@ fn reindex() {
     index.calculate_idf();
 
     // Save the in-memory index to a JSON file
-    let output_path = Path::new("index.json");
-    match index.save_index_to_json_file(output_path) {
-        Ok(_) => println!("Index saved to {}.", output_path.to_str().unwrap()),
+    match index.save_index_to_json_file(Path::new(&config.index_path)) {
+        Ok(_) => println!("Index saved to {}.", config.index_path.as_str()),
         Err(e) => println!("Error occurred: {}", e),
     }
 }
@@ -88,9 +90,13 @@ fn reindex() {
 mod tests {
     use std::{env, path::Path};
 
+    use crate::config;
+
     fn build_index_with_3_docs() -> super::Index {
         use super::Index;
         use indexer::index_builder::Document;
+
+        let config = super::config::load_config();
 
         let mut index = Index::new();
         let text = "This is a test sentence.";
@@ -111,7 +117,7 @@ mod tests {
         // Save the index to a JSON file
         index.calculate_idf();
         index
-            .save_index_to_json_file(&Path::new("test_index.json"))
+            .save_index_to_json_file(Path::new(&config.index_path))
             .unwrap();
         index
     }
@@ -129,13 +135,8 @@ mod tests {
     #[test]
     fn test_reindex() {
         // Set the current directory to the root of the project
-        let root_dir = env::current_dir().unwrap();
-
-        let mut index_path = root_dir.clone();
-        index_path.push("index.json");
-
-        let mut personal_data_path = root_dir.clone();
-        personal_data_path.push("personal_data");
+        let binding = config::load_config();
+        let index_path = Path::new(binding.index_path.as_str());
 
         // Delete the index file if it exists
         if index_path.exists() {
@@ -143,7 +144,7 @@ mod tests {
         }
 
         // Re-index the directory
-        super::reindex();
+        super::reindex(super::config::load_config());
 
         // Check that the index file was created
         assert!(index_path.exists());
