@@ -91,7 +91,7 @@ fn reindex(config: Config) {
 
 #[cfg(test)]
 mod tests {
-    use std::{path::Path};
+    use std::path::Path;
 
     use crate::config;
 
