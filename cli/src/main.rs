@@ -15,7 +15,7 @@ fn main() {
     let matches = command!()
         .subcommand_required(true)
         .subcommand(
-            Command::new("fd")
+            Command::new("search")
                 .about("Find a document with a query")
                 .arg(arg!([QUERY]))
                 .arg_required_else_help(true),
@@ -24,7 +24,7 @@ fn main() {
         .get_matches();
 
     match matches.subcommand() {
-        Some(("fd", matches)) => {
+        Some(("search", matches)) => {
             let index = Index::load_index_from_json_file(Path::new(&config.index_path))
                 .expect("Failed to load index");
             let query = matches.get_one::<String>("QUERY").unwrap();
@@ -53,8 +53,12 @@ fn search(query: &String, index: Index) -> Result<Vec<SearchResult>, Box<dyn std
     println!("Search results:");
     match search_results {
         Ok(results) => {
-            for result in &results {
-                println!("{}", result);
+            // Only print the top 10 results
+            for result in results.iter().take(10) {
+                println!(
+                    "Doc: `{}` (Match Score: {:.2})",
+                    result.document, result.score
+                );
             }
             Ok(results)
         }
