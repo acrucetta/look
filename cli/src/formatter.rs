@@ -47,17 +47,3 @@ fn encode_path(path: &Path) -> String {
     }
     path_buf.to_str().unwrap().to_string()
 }
-
-fn shorten_path(path: &Path) -> PathBuf {
-    const MAX_LENGTH: usize = 20;
-
-    if path.as_os_str().len() > MAX_LENGTH {
-        let mut shortened_path = PathBuf::from("...");
-        let path_str = path.to_str().unwrap();
-        let remaining = &path_str[path_str.len() - (MAX_LENGTH - 3)..];
-        shortened_path.push(remaining);
-        shortened_path
-    } else {
-        path.to_owned()
-    }
-}

@@ -53,8 +53,6 @@ fn main() {
 ///  * `Vec<String>` - The results of the search
 fn search(query: &String, index: Index) -> Result<(), Box<dyn std::error::Error>> {
     let search_results = search_query::search(query, &index);
-    // Print the search results
-    println!("Search results:");
     match search_results {
         Ok(results) => {
             // Only print the top 10 results
