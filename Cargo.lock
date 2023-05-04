@@ -859,6 +859,7 @@ dependencies = [
  "rust-stemmers",
  "serde",
  "serde_json",
+ "stop-words",
  "tokenizers",
  "unicode-segmentation",
  "whatlang",
@@ -1635,6 +1636,15 @@ dependencies = [
  "nom",
  "serde",
  "unicode-segmentation",
+]
+
+[[package]]
+name = "stop-words"
+version = "0.7.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "30c71f6546118f8f8fbc16434ff5ba695bc9c31616b14b1a589738d0b6ace15e"
+dependencies = [
+ "serde_json",
 ]
 
 [[package]]

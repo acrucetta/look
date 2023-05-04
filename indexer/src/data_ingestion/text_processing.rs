@@ -1,4 +1,5 @@
 use rust_stemmers::{Algorithm, Stemmer};
+use stop_words::Spark;
 use unicode_segmentation::UnicodeSegmentation;
 
 pub fn process_text(text: &str) -> String {
@@ -14,12 +15,26 @@ pub fn process_text(text: &str) -> String {
     // Step 3: Tokenize the text into words (e.g., using an NLP library or custom function)
     let tokens = tokenize(&cleaned_text);
 
+    // Step 4: Remove stop words
+    let tokens_without_stop_words = remove_stop_words(tokens);
+
     // Step 4: Stemming
     // Stemming is the process of reducing a word to its word stem
     // let stemmed_tokens = stem_tokens(tokens, language);
 
     // Step 5: Join the tokens back into a single string
-    tokens.join(" ")
+    tokens_without_stop_words.join(" ")
+}
+
+fn remove_stop_words(tokens: Vec<String>) -> Vec<String> {
+    let stops = stop_words::get(stop_words::LANGUAGE::English);
+    let mut tokens_without_stop_words: Vec<String> = Vec::new();
+    for token in tokens {
+        if !stops.contains(&token) {
+            tokens_without_stop_words.push(token);
+        }
+    }
+    tokens_without_stop_words
 }
 
 fn stem_tokens(tokens: Vec<String>, language: whatlang::Lang) -> Vec<String> {
