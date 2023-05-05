@@ -60,6 +60,11 @@ fn get_line_matches(path: &str, queried_tokens: Vec<String>) -> HashMap<usize, S
     let mut line_matches = HashMap::new();
     for (line_number, line) in file_contents.lines().enumerate() {
         for token in queried_tokens.iter() {
+            // We want to check for all cases of the token:
+            // e.g., Test, test, TEST
+            // We will lowercase the line and the token
+            let line = line.to_lowercase();
+            let token = token.to_lowercase();
             if line.contains(token) {
                 line_matches.insert(line_number, line.to_string());
             }
