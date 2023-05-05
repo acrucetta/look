@@ -50,7 +50,11 @@ fn get_relative_path(path: String) -> String {
         Ok(p) => p,
         Err(_) => full_path,
     };
-    relative_path.to_str().unwrap().to_string()
+    let hyperlink = format!(
+        "\u{1b}[38;5;81;4mfile://{}\u{1b}[0m",
+        relative_path.display()
+    );
+    hyperlink
 }
 
 fn encode_path(path: &Path) -> String {
@@ -64,4 +68,15 @@ fn encode_path(path: &Path) -> String {
         path_buf.push(encoded_component);
     }
     path_buf.to_str().unwrap().to_string()
+}
+
+#[cfg(test)]
+mod tests {
+
+    #[test]
+    fn test_relative_path() {
+        let path = "/home/username/test.txt";
+        let relative_path = super::get_relative_path(path.to_string());
+        assert_eq!(relative_path, "test.txt");
+    }
 }
