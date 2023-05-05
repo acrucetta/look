@@ -1,7 +1,10 @@
 use ansi_term::Colour::Blue;
 use indexer::search_query::SearchResult;
 use percent_encoding::{percent_encode, AsciiSet, CONTROLS};
-use std::path::{Path, PathBuf};
+use std::{
+    env,
+    path::{Path, PathBuf},
+};
 
 // Add the characters we want to exclude from percent encoding
 const ENCODE_SET: &AsciiSet = &CONTROLS.add(b' ').add(b'#').add(b'?');
@@ -26,13 +29,28 @@ pub(crate) fn format_cli_output(results: Vec<SearchResult>) -> String {
     output.push_str("----------------\n");
     for result in results.iter().take(10) {
         let path = encode_path(Path::new(&result.document.path));
-        let formatted_path = Blue.bold().paint(path).to_string();
+        let relative_path = get_relative_path(path);
+
+        let formatted_path = Blue.bold().paint(relative_path).to_string();
         output.push_str(&format!(
-            "Doc: {}{} [{:.2}]\n",
+            "\n{}{} [{:.2}]\n",
             "file://", formatted_path, result.score
-        ));
+        ))
     }
     output
+}
+
+/// Format the path with respect to the current paths
+fn get_relative_path(path: String) -> String {
+    // We want to print the relative_path with
+    // respect to the current working directory
+    let current_wd = env::current_dir().unwrap();
+    let full_path = Path::new(&path);
+    let relative_path = match full_path.strip_prefix(current_wd) {
+        Ok(p) => p,
+        Err(_) => full_path,
+    };
+    relative_path.to_str().unwrap().to_string()
 }
 
 fn encode_path(path: &Path) -> String {
