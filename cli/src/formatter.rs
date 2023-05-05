@@ -30,12 +30,8 @@ pub(crate) fn format_cli_output(results: Vec<SearchResult>) -> String {
     for result in results.iter().take(10) {
         let path = encode_path(Path::new(&result.document.path));
         let relative_path = get_relative_path(path);
-
         let formatted_path = Blue.bold().paint(relative_path).to_string();
-        output.push_str(&format!(
-            "\n{}{} [{:.2}]\n",
-            "file://", formatted_path, result.score
-        ))
+        output.push_str(&format!("\n{} [{:.2}]\n", formatted_path, result.score))
     }
     output
 }
