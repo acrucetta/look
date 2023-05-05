@@ -65,7 +65,7 @@ fn get_line_matches(path: &str, queried_tokens: Vec<String>) -> HashMap<usize, S
             // We will lowercase the line and the token
             let line = line.to_lowercase();
             let token = token.to_lowercase();
-            if line.contains(token) {
+            if line.contains(&token) {
                 line_matches.insert(line_number, line.to_string());
             }
         }
