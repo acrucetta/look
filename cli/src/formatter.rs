@@ -1,7 +1,11 @@
 use ansi_term::Colour::Blue;
-use indexer::search_query::SearchResult;
+use data_ingestion::file_handler::*;
+use indexer::{
+    data_ingestion, index_builder::file_processing::read_file_contents, search_query::SearchResult,
+};
 use percent_encoding::{percent_encode, AsciiSet, CONTROLS};
 use std::{
+    collections::HashMap,
     env,
     path::{Path, PathBuf},
 };
@@ -29,12 +33,67 @@ pub fn format_cli_output(results: Vec<SearchResult>) -> String {
         let path = encode_path(Path::new(&result.document.path));
         let relative_path = get_relative_path(&path);
         let formatted_path = Blue.bold().paint(relative_path).to_string();
-        output.push_str(&format!("\n{} [{:.2}]\n", formatted_path, result.score))
+        let get_line_matches = get_line_matches(&result.document.path, result.query_tokens.clone());
+        let formatted_line_matches =
+            format_line_match(get_line_matches, result.query_tokens.clone());
+        output.push_str(&format!("\n{} [{:.2}]\n", formatted_path, result.score));
+        // Print each match in formatted line matches
+        for line in formatted_line_matches {
+            output.push_str(&format!("{}\n", line));
+        }
     }
     output
 }
 
 /// Print the lines of code that match the query
+///
+/// We have a Vec<Search Results> object that includes
+/// a queried_tokens Vec<String>. We will open each file in
+/// the top results and get the line of text that matches that token
+/// we will highlight the specific word when it appears
+///
+/// Example output; where 25 is the line of text where it appears and
+/// the rest is the actual content.
+/// 25: This was the match
+fn get_line_matches(path: &str, queried_tokens: Vec<String>) -> HashMap<usize, String> {
+    let file_contents = read_file_contents(path).unwrap();
+    let mut line_matches = HashMap::new();
+    for (line_number, line) in file_contents.lines().enumerate() {
+        for token in queried_tokens.iter() {
+            if line.contains(token) {
+                line_matches.insert(line_number, line.to_string());
+            }
+        }
+    }
+    line_matches
+}
+
+/// Format line match
+///
+/// We want to make the line number green "70:"
+/// and the rest of the text white.
+///
+/// We also want to highlight as dark blue the matches in the words.
+fn format_line_match(
+    line_matches: HashMap<usize, String>,
+    queried_tokens: Vec<String>,
+) -> Vec<String> {
+    let mut formatted_line_matches = Vec::new();
+    for (line_number, line) in line_matches {
+        let mut formatted_line = String::new();
+        let line_number = format!("{}:", line_number);
+        let line_number = Blue.bold().paint(line_number).to_string();
+        formatted_line.push_str(&line_number);
+        formatted_line.push_str(" ");
+        for token in queried_tokens.iter() {
+            let token = Blue.bold().paint(token).to_string();
+            let line = line.replace(token.as_str(), &format!("{}", token));
+            formatted_line.push_str(&line);
+        }
+        formatted_line_matches.push(formatted_line);
+    }
+    formatted_line_matches
+}
 
 /// Format the path with respect to the current paths
 fn get_relative_path(path: &str) -> String {
