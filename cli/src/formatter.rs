@@ -1,4 +1,4 @@
-use ansi_term::Colour::Blue;
+use ansi_term::Colour::{Blue, Yellow};
 
 use indexer::{index_builder::file_processing::read_file_contents, search_query::SearchResult};
 use percent_encoding::{percent_encode, AsciiSet, CONTROLS};
@@ -89,7 +89,7 @@ fn format_line_match(
         formatted_line.push_str(&line_number);
         formatted_line.push(' ');
         for token in queried_tokens.iter() {
-            let bold_token = Blue.bold().paint(token).to_string();
+            let bold_token = Yellow.bold().paint(token).to_string();
             let line = line.replace(token.as_str(), &format!("{}", bold_token));
             formatted_line.push_str(&line);
         }
