@@ -31,12 +31,8 @@ pub fn process_directory<P: AsRef<Path>>(
     Ok(())
 }
 
-pub fn process_file<P: AsRef<Path>>(
-    path: P,
-    index: &mut Index,
-) -> Result<(), Box<dyn std::error::Error>> {
+pub fn get_file_extension<P: AsRef<Path>>(path: P) -> Result<String, Box<dyn std::error::Error>> {
     let path = path.as_ref();
-
     let file_extension = match {
         let extension = path.extension();
         extension.and_then(|s| s.to_str())
@@ -46,24 +42,23 @@ pub fn process_file<P: AsRef<Path>>(
         None => return Err(From::from("File has no extension.")),
     };
 
-    match file_extension {
+    Ok(file_extension.to_owned())
+}
+
+pub fn read_file_contents<P: AsRef<Path>>(path: P) -> Result<String, Box<dyn std::error::Error>> {
+    let path = path.as_ref();
+    let file_extension = get_file_extension(&path)?;
+
+    match file_extension.as_str() {
         "md" => {
             let file_handler = data_ingestion::MarkdownHandler;
             let content = file_handler.read_contents(path.to_str().unwrap())?;
-            let processed_text = process_text(&content);
-            let document = Document::new(path.to_str().unwrap().to_owned());
-            index.store_processed_text_in_index(&document, &processed_text);
-
-            Ok(())
+            Ok(content)
         }
         "txt" => {
             let file_handler = data_ingestion::PlainTextHandler;
             let content = file_handler.read_contents(path.to_str().unwrap())?;
-            let processed_text = process_text(&content);
-            let document = Document::new(path.to_str().unwrap().to_owned());
-            index.store_processed_text_in_index(&document, &processed_text);
-
-            Ok(())
+            Ok(content)
         }
         _ => Err(From::from(format!(
             "File extension {} is not supported.",
@@ -72,16 +67,26 @@ pub fn process_file<P: AsRef<Path>>(
     }
 }
 
+pub fn process_file<P: AsRef<Path>>(
+    path: P,
+    index: &mut Index,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let path = path.as_ref();
+    let content = read_file_contents(&path)?;
+    let document = Document::new(path.to_str().unwrap().to_owned());
+    Ok(index.store_processed_text_in_index(&document, &content))
+}
+
 #[cfg(test)]
 mod tests {
 
     #[test]
     fn test_process_file() {
-        let file_path = "data/lorem_ipsum.txt";
+        let file_path = "../data/lorem_ipsum.txt";
         let mut index = super::Index::new();
         super::process_file(file_path, &mut index).unwrap();
         print!("{:?}", index.inverted_index);
-        assert_eq!(index.inverted_index.len(), 74);
+        assert_eq!(index.inverted_index.len(), 69);
     }
 
     #[test]

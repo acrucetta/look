@@ -6,6 +6,7 @@ pub struct SearchResult {
     pub score: f64,
     pub query_tokens: Vec<String>,
     pub matched_lines: Vec<String>,
+    pub file_type: String,
 }
 
 impl SearchResult {
@@ -16,6 +17,7 @@ impl SearchResult {
             score,
             query_tokens: Vec::new(),
             matched_lines: Vec::new(),
+            file_type: String::new(),
         }
     }
 }

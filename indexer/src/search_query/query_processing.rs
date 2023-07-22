@@ -254,6 +254,7 @@ mod tests {
                 score: 0.5,
                 query_tokens: todo!(),
                 matched_lines: todo!(),
+                file_type: todo!(),
             },
             SearchResult {
                 document: Document {
@@ -262,6 +263,7 @@ mod tests {
                 score: 0.2,
                 query_tokens: todo!(),
                 matched_lines: todo!(),
+                file_type: todo!(),
             },
             SearchResult {
                 document: Document {
@@ -270,6 +272,7 @@ mod tests {
                 score: 0.8,
                 query_tokens: todo!(),
                 matched_lines: todo!(),
+                file_type: todo!(),
             },
         ];
         results.sort_by(|a, b| b.score.partial_cmp(&a.score).unwrap());

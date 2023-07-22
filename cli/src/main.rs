@@ -89,6 +89,8 @@ fn reindex(config: Config) {
 mod tests {
     use std::path::Path;
 
+    use indexer::Index;
+
     use crate::config;
 
     fn build_index_with_3_docs() -> super::Index {
@@ -126,6 +128,14 @@ mod tests {
         let index = build_index_with_3_docs();
 
         let query = "test";
+        let results = super::search(&query.to_owned(), index).unwrap();
+    }
+
+    #[test]
+    fn test_search_with_all_indexed_terms() {
+        let config = config::load_config();
+        let index = Index::load_index_from_json_file(Path::new(&config.index_path)).unwrap();
+        let query = "more";
         let results = super::search(&query.to_owned(), index).unwrap();
     }
 
