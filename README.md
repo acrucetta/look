@@ -1,21 +1,21 @@
-# looker: a simple and fast way to search your notes
+# look: a simple and fast way to search your notes
 
-Looker, a Rust-based CLI, uses the Term Frequency-Inverse Document Frequency (TF-IDF) algorithm to search for terms across your text documents in a given directory. By generating an inverted index, it helps you retrieve information quickly and efficiently.
+look, a Rust-based CLI, uses the Term Frequency-Inverse Document Frequency (TF-IDF) algorithm to search for terms across your text documents in a given directory. By generating an inverted index, it helps you retrieve information quickly and efficiently.
 
 ## Installation
 
-To install Looker, you first need to have Rust installed on your machine. If you haven't installed Rust yet, you can do so by following the instructions on the [official Rust website](https://www.rust-lang.org/tools/install).
+To install look, you first need to have Rust installed on your machine. If you haven't installed Rust yet, you can do so by following the instructions on the [official Rust website](https://www.rust-lang.org/tools/install).
 
-Once Rust is installed, clone the Looker repository to your local machine using the following command in your terminal:
+Once Rust is installed, clone the look repository to your local machine using the following command in your terminal:
 
 ```bash
-git clone https://github.com/your_username/looker.git
+git clone https://github.com/your_username/look.git
 ```
 
-Navigate to the `looker` directory:
+Navigate to the `look` directory:
 
 ```bash
-cd looker
+cd look
 ```
 
 Finally, build the project:
@@ -24,27 +24,27 @@ Finally, build the project:
 cargo build --release
 ```
 
-You should now have the `looker` executable in the `target/release` directory.
+You should now have the `look` executable in the `target/release` directory.
 
 ## Setup
 
-To configure Looker, the utility automatically generates a configuration file `.env` in a `looker-cli` subdirectory within your system's configuration directory. This file contains two key entries:
+To configure look, the utility automatically generates a configuration file `.env` in a `look-cli` subdirectory within your system's configuration directory. This file contains two key entries:
 
 1. `INDEX_PATH`: The location where the `index.json` index file will be stored.
-2. `PERSONAL_DATA`: The directory Looker will search and index.
+2. `PERSONAL_DATA`: The directory look will search and index.
 
-By default, Looker will create these paths under the `looker-cli` directory. If you wish to specify different directories, you can edit the `.env` file and replace the paths next to `INDEX_PATH` and `PERSONAL_DATA`.
+By default, look will create these paths under the `look-cli` directory. If you wish to specify different directories, you can edit the `.env` file and replace the paths next to `INDEX_PATH` and `PERSONAL_DATA`.
 
 ## Usage
 
-Looker offers two main commands: `for` and `reindex`.
+look offers two main commands: `for` and `reindex`.
 
 ### The 'for' Command
 
 The 'for' command facilitates searching for a specific term within the indexed documents. Use it as follows:
 
 ```bash
-looker for "your_query"
+look for "your_query"
 ```
 
 Replace `"your_query"` with the term you're searching for.
@@ -66,12 +66,12 @@ The output was inspired by ripgrep. I wanted to make it easy to see the context 
 You can use the 'reindex' command to re-index a directory. This is particularly useful when you have added new files or updated existing ones. Use it as follows:
 
 ```bash
-looker reindex
+look reindex
 ```
 
 ## Tests
 
-Looker comes with a suite of tests to ensure optimal functionality. These tests cover the 'search' and 'reindex' functions.
+look comes with a suite of tests to ensure optimal functionality. These tests cover the 'search' and 'reindex' functions.
 
 ## Search architecture details
 
