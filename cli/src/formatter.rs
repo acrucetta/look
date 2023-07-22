@@ -1,8 +1,6 @@
 use ansi_term::Colour::Blue;
 
-use indexer::{
-    index_builder::file_processing::read_file_contents, search_query::SearchResult,
-};
+use indexer::{index_builder::file_processing::read_file_contents, search_query::SearchResult};
 use percent_encoding::{percent_encode, AsciiSet, CONTROLS};
 use std::{
     collections::HashMap,
@@ -91,8 +89,8 @@ fn format_line_match(
         formatted_line.push_str(&line_number);
         formatted_line.push(' ');
         for token in queried_tokens.iter() {
-            let token = Blue.bold().paint(token).to_string();
-            let line = line.replace(token.as_str(), &token.to_string());
+            let bold_token = Blue.bold().paint(token).to_string();
+            let line = line.replace(token.as_str(), &format!("{}", bold_token));
             formatted_line.push_str(&line);
         }
         formatted_line_matches.push(formatted_line);
@@ -134,11 +132,26 @@ fn encode_path(path: &Path) -> String {
 
 #[cfg(test)]
 mod tests {
+    use std::collections::HashMap;
+
+    use crate::formatter::format_line_match;
 
     #[test]
     fn test_relative_path() {
         let path = "/home/username/test.txt";
         let relative_path = super::get_relative_path(path);
         assert_eq!(relative_path, "test.txt");
+    }
+
+    #[test]
+    fn test_format_line_match() {
+        let mut line_matches: HashMap<usize, String> = HashMap::new();
+        line_matches.insert(3, "This is a test sentence.".to_string());
+        let queried_tokens = vec!["test".to_string()];
+        let formatted_line_matches = format_line_match(line_matches, queried_tokens);
+        let expected =
+            vec!["\x1B[1;34m3:\x1B[0m This is a \x1B[1;34mtest\x1B[0m sentence.".to_string()];
+        print!("{:?}", formatted_line_matches);
+        assert_eq!(formatted_line_matches, expected);
     }
 }
