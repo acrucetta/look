@@ -3,7 +3,7 @@ use config::Config;
 use indexer::index_builder::file_processing::process_directory;
 use indexer::index_builder::Index;
 use indexer::search_query;
-use indexer::search_query::SearchResult;
+
 use std::env;
 use std::path::Path;
 mod config;
@@ -29,7 +29,7 @@ fn main() {
             let index = Index::load_index_from_json_file(Path::new(&config.index_path))
                 .expect("Failed to load index");
             let query = matches.get_one::<String>("QUERY").unwrap();
-            match search(&query, index) {
+            match search(query, index) {
                 Ok(_) => {}
                 Err(e) => println!("Error occurred: {}", e),
             }
@@ -128,7 +128,7 @@ mod tests {
         let index = build_index_with_3_docs();
 
         let query = "test";
-        let results = super::search(&query.to_owned(), index).unwrap();
+        super::search(&query.to_owned(), index).unwrap();
     }
 
     #[test]
@@ -136,7 +136,7 @@ mod tests {
         let config = config::load_config();
         let index = Index::load_index_from_json_file(Path::new(&config.index_path)).unwrap();
         let query = "more";
-        let results = super::search(&query.to_owned(), index).unwrap();
+        super::search(&query.to_owned(), index).unwrap();
     }
 
     #[test]

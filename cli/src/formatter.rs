@@ -1,7 +1,7 @@
 use ansi_term::Colour::Blue;
-use data_ingestion::file_handler::*;
+
 use indexer::{
-    data_ingestion, index_builder::file_processing::read_file_contents, search_query::SearchResult,
+    index_builder::file_processing::read_file_contents, search_query::SearchResult,
 };
 use percent_encoding::{percent_encode, AsciiSet, CONTROLS};
 use std::{
@@ -89,10 +89,10 @@ fn format_line_match(
         let line_number = format!("{}:", line_number);
         let line_number = Blue.bold().paint(line_number).to_string();
         formatted_line.push_str(&line_number);
-        formatted_line.push_str(" ");
+        formatted_line.push(' ');
         for token in queried_tokens.iter() {
             let token = Blue.bold().paint(token).to_string();
-            let line = line.replace(token.as_str(), &format!("{}", token));
+            let line = line.replace(token.as_str(), &token.to_string());
             formatted_line.push_str(&line);
         }
         formatted_line_matches.push(formatted_line);
