@@ -63,9 +63,9 @@ fn tokenize(cleaned_text: &str) -> Vec<String> {
     // e.g., "Hello, world!" -> ["Hello", ",", "world", "!"]
     // We want to keep punctuation so that we can use it for phrase queries
     let tokens = cleaned_text.split_word_bounds();
-
-    // Return the tokens as a vector
-    tokens.map(|token| token.to_owned()).collect()
+    let mut vector_tokens: Vec<String> = tokens.map(|token| token.to_owned()).collect();
+    vector_tokens.retain(|token| !token.contains(" "));
+    vector_tokens
 }
 
 /// Removes any characters that are not alphanumeric from the text
@@ -85,6 +85,9 @@ fn remove_unwanted_characters(lowercased_text: &str) -> String {
         }
     }
 
+    // Trim leading and trailing whitespace
+    cleaned_text = cleaned_text.trim().to_owned();
+
     cleaned_text
 }
 
@@ -95,9 +98,9 @@ mod tests {
     #[test]
     fn test_remove_unwanted_characters() {
         let tests: Vec<(&str, &str)> = vec![
-            ("Hello, world!", "Helloworld"),
-            ("Hello, world! 123", "Helloworld123"),
-            ("Hello, world! 123 $%^&*()", "Helloworld123"),
+            ("Hello, world!", "Hello world"),
+            ("Hello, world! 123", "Hello world 123"),
+            ("Hello, world! 123 $%^&*()", "Hello world 123"),
         ];
 
         for (input, expected_output) in tests {
@@ -109,12 +112,12 @@ mod tests {
     #[test]
     fn test_tokenize() {
         let tests: Vec<(&str, Vec<&str>)> = vec![
-            ("Hello, world!", vec!["hello", ",", "world", "!"]),
-            ("Hello, world! 123", vec!["hello", ",", "world", "!", "123"]),
+            ("Hello, world!", vec!["Hello", ",", "world", "!"]),
+            ("Hello, world! 123", vec!["Hello", ",", "world", "!", "123"]),
             (
                 "Hello, world! 123 $%^&*()",
                 vec![
-                    "hello", ",", "world", "!", "123", "$", "%", "^", "&", "*", "(", ")",
+                    "Hello", ",", "world", "!", "123", "$", "%", "^", "&", "*", "(", ")",
                 ],
             ),
         ];
@@ -127,18 +130,18 @@ mod tests {
 
     #[test]
     fn test_process_text() {
-        let input = "Hello, world!";
-        let expected_output = "hello world";
+        let input = "A blue car!";
+        let expected_output = "blue car";
         let output = process_text(input);
         assert_eq!(output, expected_output);
     }
 
     #[test]
     fn process_text_in_file() {
-        let file_path = "data/lorem_ipsum.txt";
+        let file_path = "data/blue_car.txt";
         let contents = std::fs::read_to_string(file_path).unwrap();
         let processed_text = process_text(&contents);
-        assert_eq!(processed_text, "lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum");
+        assert_eq!(processed_text, "blue car");
     }
 
     #[test]
