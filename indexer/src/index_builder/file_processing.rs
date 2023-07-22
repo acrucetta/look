@@ -82,11 +82,11 @@ mod tests {
 
     #[test]
     fn test_process_file() {
-        let file_path = "../data/lorem_ipsum.txt";
+        let file_path = "data/longer_text.txt";
         let mut index = super::Index::new();
         super::process_file(file_path, &mut index).unwrap();
         print!("{:?}", index.inverted_index);
-        assert_eq!(index.inverted_index.len(), 69);
+        assert_eq!(index.inverted_index.len(), 35);
     }
 
     #[test]

@@ -145,6 +145,14 @@ mod tests {
     }
 
     #[test]
+    fn process_text_in_longer_file() {
+        let file_path = "data/longer_text.txt";
+        let contents = std::fs::read_to_string(file_path).unwrap();
+        let processed_text = process_text(&contents);
+        assert_eq!(processed_text, "blue car");
+    }
+
+    #[test]
     fn test_process_spanish_text() {
         let input = "Hola, mundo este idioma es español!";
         let expected_output = "hola mundo este idioma es español";

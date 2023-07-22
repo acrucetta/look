@@ -5,6 +5,8 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::path::Path;
 
+use crate::data_ingestion::text_processing::process_text;
+
 use super::{
     json_serialization::{deserialize_inverted_index, deserialize_vec_to_hashmap},
     Document, Term,
@@ -29,7 +31,8 @@ impl Index {
     }
 
     pub fn store_processed_text_in_index(&mut self, document: &Document, text: &str) {
-        let tokens = text.split_whitespace().collect::<Vec<&str>>();
+        let processed_txt = process_text(&text);
+        let tokens = processed_txt.split_whitespace().collect::<Vec<&str>>();
         self.num_docs += 1;
 
         for token in tokens {
@@ -130,10 +133,7 @@ impl Index {
 
     fn insert_token(&mut self, token: &str, document: &Document) {
         let term = Term(token.to_owned());
-        let entry = self
-            .inverted_index
-            .entry(term)
-            .or_insert_with(HashMap::new);
+        let entry = self.inverted_index.entry(term).or_insert_with(HashMap::new);
         let term_frequency = entry.entry(document.clone()).or_insert(0);
         *term_frequency += 1;
     }
@@ -152,10 +152,7 @@ impl Index {
 mod tests {
     use std::{collections::HashMap, path::Path};
 
-    use crate::{
-        index_builder::{index_storage::Term},
-        Index,
-    };
+    use crate::{index_builder::index_storage::Term, Index};
 
     fn build_index_with_3_docs() -> super::Index {
         use super::Index;
